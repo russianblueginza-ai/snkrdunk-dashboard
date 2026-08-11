@@ -1,0 +1,28 @@
+/* ============================================================
+   custom.css — your personal style tweaks.
+
+   This file is never touched or overwritten, even when scraper.py or
+   the templates get updated for new features later on. Add any CSS
+   overrides here and they'll survive every future update.
+
+   To find a class name to target: open dashboard.html in your browser,
+   right-click the thing you want to change, and choose "Inspect".
+
+   Uncomment any example below by deleting its comment markers to try it, or
+   write your own rules the same way.
+   ============================================================ */
+
+/* Make card titles bigger */
+.card__name { font-size: 17px; color: #6bdfff; }
+
+/* Make the "Last checked" text bigger */
+.updated { font-size: 10px; color: #6bffe6; }
+
+/* Make the big portfolio value even bigger */
+/* .portfolio__value { font-size: 60px; } */
+
+/* Change the accent gradient colors used throughout (teal -> magenta) */
+/* :root {
+  --foil-teal: #4fd1c5;
+  --foil-magenta: #e879f9;
+} */

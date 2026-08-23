@@ -190,6 +190,49 @@
 
   .sold-row__na { color: var(--text-muted); }
 
+  .sold-row__name-link {
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--text-muted);
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .sold-row__name-link:hover {
+    color: var(--foil-teal);
+    border-color: var(--foil-teal);
+  }
+
+  .sold-row__rebuy {
+    display: inline-block;
+    color: #fbbf24;
+    font-weight: 700;
+    animation: rebuyRowPulse 1.6s ease-in-out infinite;
+  }
+
+  @keyframes rebuyRowPulse {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; text-shadow: 0 0 8px rgba(251, 191, 36, 0.6); }
+  }
+
+  .sold-row__track {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 400;
+    margin-top: 4px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .sold-row__track input {
+    accent-color: var(--foil-teal);
+    cursor: pointer;
+    width: 13px;
+    height: 13px;
+  }
+
   .sold-row__delete {
     background: transparent;
     border: 1px solid rgba(248, 113, 113, 0.35);
@@ -226,7 +269,7 @@
 
 <header>
   <h1>SOLD <span>PORTFOLIO</span></h1>
-  <div class="updated">Last checked: <span class="updated__time">2:51 PM</span> on 2026-08-23</div>
+  <div class="updated">Last checked: <span class="updated__time">3:39 PM</span> on 2026-08-23</div>
 </header>
 
 <p style="max-width:1100px;margin:0 auto 20px;"><a class="back-link" href="dashboard.html">← Back to Dashboard</a></p>
@@ -246,18 +289,19 @@
       <table class="sold-table">
         <thead>
           <tr>
-            <th>Card</th><th>Sold</th><th>Bought</th><th>Sold Price</th><th>Fee</th><th>Net</th><th>Profit</th><th></th>
+            <th>Card</th><th>Sold</th><th>Bought</th><th>Sold Price</th><th>Fee</th><th>Net</th><th>Profit</th><th>Current Price</th><th></th>
           </tr>
         </thead>
         <tbody>
         <tr>
-          <td>Umbreon VMAX CSR</td>
+          <td><a class="sold-row__name-link" href="https://snkrdunk.com/apparels/96729/sales-histories" target="_blank" rel="noopener">Umbreon VMAX CSR</a></td>
           <td>Aug 21, 2026</td>
           <td>¥28,000</td>
           <td>¥37,900</td>
           <td>-¥3,222</td>
           <td>¥34,678</td>
           <td><span class="profit--up">▲ +¥6,678</span></td>
+          <td>¥38,199<br><label class="sold-row__track"><input type="checkbox" checked onchange="toggleSoldTracking('f882ad9d384346779c8d8d75754ab606', this)"> Track</label></td>
           <td><button type="button" class="sold-row__delete" onclick="deleteSoldRecord('f882ad9d384346779c8d8d75754ab606', this)">Delete</button></td>
         </tr></tbody>
       </table>
@@ -303,6 +347,35 @@ async function deleteSoldRecord(id, btnEl) {
     const message = err.name === 'AbortError'
       ? 'Timed out — check config_editor.py is still running, then try again.'
       : 'Could not delete — is config_editor.py running? (' + err.message + ')';
+    alert(message);
+  }
+}
+
+async function toggleSoldTracking(id, checkboxEl) {
+  const wantsTracked = checkboxEl.checked;
+  checkboxEl.disabled = true;
+
+  const controller = new AbortController();
+  const timeoutId = setTimeout(function () { controller.abort(); }, 10000);
+
+  try {
+    const res = await fetch(CONFIG_EDITOR_URL + '/api/toggle-sold-tracking', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: id, tracked: wantsTracked }),
+      signal: controller.signal
+    });
+    clearTimeout(timeoutId);
+    const result = await res.json();
+    if (!res.ok || !result.ok) throw new Error(result.error || 'Unknown error');
+    location.reload();
+  } catch (err) {
+    clearTimeout(timeoutId);
+    checkboxEl.checked = !wantsTracked;
+    checkboxEl.disabled = false;
+    const message = err.name === 'AbortError'
+      ? 'Timed out — check config_editor.py is still running, then try again.'
+      : 'Could not update — is config_editor.py running? (' + err.message + ')';
     alert(message);
   }
 }

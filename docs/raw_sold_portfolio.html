@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SNKRDUNK Watch — Sold Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #14151c;
+    --surface: #1c1e28;
+    --surface-border: #2b2e3b;
+    --text: #f2efe8;
+    --text-muted: #8b8d9a;
+    --foil-teal: #4fd1c5;
+    --foil-magenta: #e879f9;
+    --up: #34d399;
+    --down: #f87171;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(79,209,197,0.06), transparent 40%),
+      radial-gradient(circle at 85% 100%, rgba(232,121,249,0.05), transparent 40%);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    min-height: 100vh;
+    padding: 48px 24px 80px;
+  }
+
+  header {
+    max-width: 1100px;
+    margin: 0 auto 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 1px solid var(--surface-border);
+    padding-bottom: 20px;
+  }
+
+  h1 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  h1 span {
+    background: linear-gradient(90deg, var(--foil-teal), var(--foil-magenta));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .back-link {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+
+  .back-link:hover { color: var(--foil-teal); }
+
+  .updated {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    color: var(--text);
+    letter-spacing: 0.01em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .updated__time { font-weight: 700; }
+
+  .portfolio {
+    max-width: 1100px;
+    margin: 0 auto 32px;
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .portfolio::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--foil-teal), var(--foil-magenta));
+    opacity: 0.7;
+  }
+
+  .portfolio__eyebrow {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 10px;
+  }
+
+  .portfolio__totals {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .portfolio__value {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 44px;
+    letter-spacing: 0.01em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .portfolio__value.profit--up { color: var(--up); }
+  .portfolio__value.profit--down { color: var(--down); }
+
+  .portfolio__badge {
+    font-size: 15px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+
+  .portfolio__badge.profit--up { color: var(--up); background: rgba(52,211,153,0.12); }
+  .portfolio__badge.profit--down { color: var(--down); background: rgba(248,113,113,0.12); }
+
+  .portfolio__sub {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 8px 0 0;
+  }
+
+  .portfolio__empty {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .sold-table-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    border-radius: 12px;
+    overflow-x: auto;
+  }
+
+  .sold-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    min-width: 720px;
+  }
+
+  .sold-table th {
+    text-align: left;
+    padding: 14px 16px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+    border-bottom: 1px solid var(--surface-border);
+  }
+
+  .sold-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--surface-border);
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .sold-table tr:last-child td { border-bottom: none; }
+
+  .sold-table .profit--up { color: var(--up); font-weight: 600; }
+  .sold-table .profit--down { color: var(--down); font-weight: 600; }
+
+  .sold-row__na { color: var(--text-muted); }
+
+  .sold-row__name-link {
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--text-muted);
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .sold-row__name-link:hover {
+    color: var(--foil-teal);
+    border-color: var(--foil-teal);
+  }
+
+  .sold-row__rebuy {
+    display: inline-block;
+    color: #fbbf24;
+    font-weight: 700;
+    animation: rebuyRowPulse 1.6s ease-in-out infinite;
+  }
+
+  @keyframes rebuyRowPulse {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; text-shadow: 0 0 8px rgba(251, 191, 36, 0.6); }
+  }
+
+  .sold-row__track {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 400;
+    margin-top: 4px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .sold-row__track input {
+    accent-color: var(--foil-teal);
+    cursor: pointer;
+    width: 13px;
+    height: 13px;
+  }
+
+  .sold-row__delete {
+    background: transparent;
+    border: 1px solid rgba(248, 113, 113, 0.35);
+    color: var(--down);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease;
+  }
+
+  .sold-row__delete:hover {
+    background: rgba(248, 113, 113, 0.1);
+    border-color: var(--down);
+  }
+
+  .sold-row__delete:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  footer {
+    max-width: 1100px;
+    margin: 32px auto 0;
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>SOLD <span>PORTFOLIO</span></h1>
+  <div class="updated">Last checked: <span class="updated__time">10:42 AM</span> on 2026-08-25</div>
+</header>
+
+<p style="max-width:1100px;margin:0 auto 20px;"><a class="back-link" href="dashboard_raw.html">← Back to Dashboard</a></p>
+
+
+    <section class="portfolio">
+      <p class="portfolio__eyebrow">Total realized profit</p>
+      <p class="portfolio__empty">No cards sold yet. Use the SOLD button on a card in your dashboard to record a sale.</p>
+    </section>
+
+
+
+<footer>
+  Prices shown after SNKRDUNK's 8.5% selling fee. Sell a card from your dashboard to add it here.
+</footer>
+
+<script>
+const CONFIG_EDITOR_URL = 'http://127.0.0.1:8765';
+// Which collection this sold-portfolio page belongs to — "psa" or "raw" —
+// so config_editor.py knows which sold-portfolio file to modify. Set by
+// the page itself when it's generated.
+const PORTFOLIO_KEY = 'raw';
+
+async function deleteSoldRecord(id, btnEl) {
+  const row = btnEl.closest('tr');
+  const cardName = row ? row.querySelector('td').textContent : 'this record';
+  const confirmed = confirm(
+    'Delete the sold record for "' + cardName + '"?\n\n' +
+    'This cannot be undone. (Requires config_editor.py to be running.)'
+  );
+  if (!confirmed) return;
+
+  btnEl.disabled = true;
+  btnEl.textContent = 'Deleting…';
+
+  const controller = new AbortController();
+  const timeoutId = setTimeout(function () { controller.abort(); }, 10000);
+
+  try {
+    const res = await fetch(CONFIG_EDITOR_URL + '/api/delete-sold', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: id, portfolio: PORTFOLIO_KEY }),
+      signal: controller.signal
+    });
+    clearTimeout(timeoutId);
+    const result = await res.json();
+    if (!res.ok || !result.ok) throw new Error(result.error || 'Unknown error');
+    location.reload();
+  } catch (err) {
+    clearTimeout(timeoutId);
+    btnEl.disabled = false;
+    btnEl.textContent = 'Delete';
+    const message = err.name === 'AbortError'
+      ? 'Timed out — check config_editor.py is still running, then try again.'
+      : 'Could not delete — is config_editor.py running? (' + err.message + ')';
+    alert(message);
+  }
+}
+
+async function toggleSoldTracking(id, checkboxEl) {
+  const wantsTracked = checkboxEl.checked;
+  checkboxEl.disabled = true;
+
+  const controller = new AbortController();
+  const timeoutId = setTimeout(function () { controller.abort(); }, 10000);
+
+  try {
+    const res = await fetch(CONFIG_EDITOR_URL + '/api/toggle-sold-tracking', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: id, tracked: wantsTracked, portfolio: PORTFOLIO_KEY }),
+      signal: controller.signal
+    });
+    clearTimeout(timeoutId);
+    const result = await res.json();
+    if (!res.ok || !result.ok) throw new Error(result.error || 'Unknown error');
+    location.reload();
+  } catch (err) {
+    clearTimeout(timeoutId);
+    checkboxEl.checked = !wantsTracked;
+    checkboxEl.disabled = false;
+    const message = err.name === 'AbortError'
+      ? 'Timed out — check config_editor.py is still running, then try again.'
+      : 'Could not update — is config_editor.py running? (' + err.message + ')';
+    alert(message);
+  }
+}
+</script>
+
+</body>
+</html>

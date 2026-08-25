@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SNKRDUNK Watch — Raw Cards</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #14151c;
+    --surface: #1c1e28;
+    --surface-border: #2b2e3b;
+    --text: #f2efe8;
+    --text-muted: #8b8d9a;
+    --foil-teal: #4fd1c5;
+    --foil-magenta: #e879f9;
+    --up: #34d399;
+    --down: #f87171;
+    --flat: #6b6e7d;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(79,209,197,0.06), transparent 40%),
+      radial-gradient(circle at 85% 100%, rgba(232,121,249,0.05), transparent 40%);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    min-height: 100vh;
+    padding: 48px 24px 80px;
+  }
+
+  header {
+    max-width: 1100px;
+    margin: 0 auto 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    border-bottom: 1px solid var(--surface-border);
+    padding-bottom: 20px;
+  }
+
+  .header__logo {
+    --logo-height: 64px;
+    height: var(--logo-height);
+    width: auto;
+    display: block;
+  }
+
+  .header__right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }
+
+  .header__nav-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .header__sold-link {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--foil-teal);
+    text-decoration: none;
+  }
+
+  .header__sold-link:hover {
+    text-decoration: underline;
+  }
+
+  .header__rebuy-badge {
+    font-size: 12px;
+    font-weight: 700;
+    color: #fbbf24;
+    background: rgba(251, 191, 36, 0.12);
+    border: 1px solid rgba(251, 191, 36, 0.4);
+    border-radius: 20px;
+    padding: 4px 12px;
+    text-decoration: none;
+    animation: rebuyBadgePulse 2s ease-in-out infinite;
+  }
+
+  .header__rebuy-badge:hover {
+    background: rgba(251, 191, 36, 0.2);
+  }
+
+  @keyframes rebuyBadgePulse {
+    0%, 100% { border-color: rgba(251, 191, 36, 0.4); }
+    50% { border-color: rgba(251, 191, 36, 0.8); }
+  }
+
+  .updated {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    color: var(--text);
+    letter-spacing: 0.01em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .updated__time {
+    font-weight: 700;
+  }
+
+  .psa-alert {
+    max-width: 1100px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(251, 191, 36, 0.1);
+    border: 1px solid rgba(251, 191, 36, 0.4);
+    border-radius: 10px;
+    padding: 12px 16px;
+    animation: psaAlertPulse 2s ease-in-out infinite;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  .psa-alert:hover,
+  .psa-alert:focus-visible {
+    background: rgba(251, 191, 36, 0.16);
+    outline: none;
+  }
+
+  .psa-alert__icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    animation: psaAlertRing 1.4s ease-in-out infinite;
+  }
+
+  .psa-alert__text {
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  .psa-alert__text strong {
+    color: #fbbf24;
+  }
+
+  .psa-alert__hint {
+    color: var(--text-muted);
+    font-size: 12px;
+  }
+
+  @keyframes psaAlertPulse {
+    0%, 100% { border-color: rgba(251, 191, 36, 0.4); }
+    50% { border-color: rgba(251, 191, 36, 0.8); }
+  }
+
+  @keyframes psaAlertRing {
+    0%, 100% { transform: rotate(0deg); }
+    10% { transform: rotate(-12deg); }
+    20% { transform: rotate(10deg); }
+    30% { transform: rotate(-8deg); }
+    40% { transform: rotate(6deg); }
+    50%, 100% { transform: rotate(0deg); }
+  }
+
+  .psa-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .psa-modal-overlay.psa-modal-overlay--open {
+    display: flex;
+  }
+
+  .psa-modal {
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    border-radius: 12px;
+    max-width: 560px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 24px;
+    position: relative;
+  }
+
+  .psa-modal--wide {
+    max-width: 640px;
+  }
+
+  .psa-modal::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--foil-teal), var(--foil-magenta));
+    border-radius: 12px 12px 0 0;
+  }
+
+  .psa-modal__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .psa-modal__header h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text);
+  }
+
+  .psa-modal__close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  .psa-modal__close:hover { color: var(--text); }
+
+  .psa-modal__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .psa-modal__item {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--surface-border);
+  }
+
+  .psa-modal__item:last-child { border-bottom: none; }
+
+  .psa-modal__card-name {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text);
+    margin: 0 0 8px;
+  }
+
+  .psa-modal__bullets {
+    margin: 0;
+    padding-left: 20px;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .psa-modal__bullets li:last-child {
+    color: #34d399;
+    font-weight: 600;
+  }
+
+  .psa-modal__summary {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin: -8px 0 14px;
+  }
+
+  .volume-chart {
+    margin: 0 0 18px;
+  }
+
+  .volume-chart__bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 120px;
+    padding-top: 8px;
+    border-bottom: 1px solid var(--surface-border);
+  }
+
+  .volume-chart__bar-col {
+    flex: 1;
+    min-width: 4px;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .volume-chart__bar {
+    width: 100%;
+    background: var(--foil-teal);
+    border-radius: 2px 2px 0 0;
+    opacity: 0.85;
+    transition: opacity 0.15s ease;
+  }
+
+  .volume-chart__bar-col:hover .volume-chart__bar {
+    opacity: 1;
+  }
+
+  .volume-chart__labels {
+    display: flex;
+    gap: 3px;
+    margin-top: 5px;
+  }
+
+  .volume-chart__label-col {
+    flex: 1;
+    min-width: 4px;
+    text-align: center;
+    font-size: 9px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+    overflow: visible;
+  }
+
+  .volume-table-wrap {
+    max-height: 260px;
+    overflow-y: auto;
+    border-top: 1px solid var(--surface-border);
+  }
+
+  .volume-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .volume-table th {
+    position: sticky;
+    top: 0;
+    background: var(--surface);
+    text-align: left;
+    padding: 10px 4px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+  }
+
+  .volume-table td {
+    padding: 8px 4px;
+    border-bottom: 1px solid var(--surface-border);
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .volume-table tr:last-child td { border-bottom: none; }
+
+  .sortbar {
+    max-width: 1100px;
+    margin: 0 auto 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .sortbar__label {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .sort-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    border-radius: 20px;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .sort-btn:hover {
+    color: var(--text);
+    border-color: var(--foil-teal);
+  }
+
+  .sort-btn.active {
+    color: var(--bg);
+    background: linear-gradient(90deg, var(--foil-teal), var(--foil-magenta));
+    border-color: transparent;
+    font-weight: 600;
+  }
+
+  .portfolio {
+    /* Tweak these two to resize the whole panel */
+    --portfolio-chart-height: 190px;
+    --portfolio-value-size: 44px;
+
+    max-width: 1100px;
+    margin: 0 auto 32px;
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    border-radius: 12px;
+    padding: 24px 28px 12px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .portfolio::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--foil-teal), var(--foil-magenta));
+    opacity: 0.7;
+  }
+
+  .portfolio__header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .portfolio__eyebrow {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0;
+  }
+
+  .range-bar {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .range-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: var(--bg);
+    border: 1px solid var(--surface-border);
+    border-radius: 16px;
+    padding: 4px 11px;
+    cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .range-btn:hover {
+    color: var(--text);
+    border-color: var(--foil-teal);
+  }
+
+  .range-btn.active {
+    color: var(--bg);
+    background: linear-gradient(90deg, var(--foil-teal), var(--foil-magenta));
+    border-color: transparent;
+  }
+
+  .portfolio__totals {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .portfolio__value {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: var(--portfolio-value-size);
+    letter-spacing: 0.01em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .portfolio__badge {
+    font-size: 15px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+
+  .portfolio__badge.profit--up { background: rgba(52,211,153,0.12); }
+  .portfolio__badge.profit--down { background: rgba(248,113,113,0.12); }
+
+  .portfolio__sub {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 8px 0 0;
+  }
+
+  .portfolio__empty {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .portfolio__chart {
+    margin-top: 18px;
+    width: 100%;
+  }
+
+  .portfolio__chart-row {
+    display: flex;
+    width: 100%;
+    height: calc(var(--portfolio-chart-height) - 22px);
+  }
+
+  .portfolio__chart-ylabels {
+    width: 58px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2px 8px 2px 0;
+    text-align: right;
+    font-size: 11px;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .portfolio__chart-plot {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .portfolio__chart-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .portfolio__chart-xlabels {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 58px;
+    padding-top: 6px;
+    font-size: 11px;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .portfolio__chart--empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-align: center;
+    border-top: 1px dashed var(--surface-border);
+    margin-top: 10px;
+    padding-top: 16px;
+  }
+
+  .grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    border-radius: 10px;
+    padding: 20px 20px 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--foil-teal), var(--foil-magenta));
+    opacity: 0.7;
+  }
+
+  .card--profit {
+    border-color: rgba(52,211,153,0.35);
+    background:
+      linear-gradient(180deg, rgba(52,211,153,0.07), transparent 55%),
+      var(--surface);
+  }
+
+  .card--profit::before {
+    background: var(--up);
+    opacity: 0.9;
+  }
+
+  .card--loss {
+    border-color: rgba(248,113,113,0.35);
+    background:
+      linear-gradient(180deg, rgba(248,113,113,0.07), transparent 55%),
+      var(--surface);
+  }
+
+  .card--loss::before {
+    background: var(--down);
+    opacity: 0.9;
+  }
+
+  /* Cards profiting more than the "hot" threshold get an animated
+     fire treatment — pulsing glow, shifting ember-gradient top bar,
+     and a flickering flame icon next to the profit line. Overrides
+     the plain .card--profit styling above since it's more specific
+     (two classes) and comes later in the stylesheet. */
+  .card--hot.card--profit {
+    border-color: rgba(255,138,61,0.6);
+    background:
+      linear-gradient(180deg, rgba(255,107,26,0.12), transparent 60%),
+      var(--surface);
+    animation: fireGlowPulse 1.8s ease-in-out infinite;
+  }
+
+  .card--hot.card--profit::before {
+    background: linear-gradient(90deg, #ff5b1f, #ffb347, #ff5b1f);
+    background-size: 200% 100%;
+    opacity: 1;
+    animation: fireBarShift 2.4s linear infinite;
+  }
+
+  @keyframes fireGlowPulse {
+    0%, 100% { box-shadow: 0 0 14px 1px rgba(255,90,20,0.35); }
+    50% { box-shadow: 0 0 28px 6px rgba(255,70,10,0.6); }
+  }
+
+  @keyframes fireBarShift {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+  }
+
+  .card__hot-icon {
+    display: inline-block;
+    font-size: 0.85em;
+    margin-left: 2px;
+    transform-origin: 70% 90%;
+    animation: flameFlicker 1.1s ease-in-out infinite;
+  }
+
+  @keyframes flameFlicker {
+    0%, 100% { transform: scale(1) rotate(-3deg); opacity: 0.9; }
+    30% { transform: scale(1.12) rotate(3deg); opacity: 1; }
+    55% { transform: scale(0.9) rotate(-5deg); opacity: 0.85; }
+    80% { transform: scale(1.08) rotate(2deg); opacity: 1; }
+  }
+
+  .card--empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 140px;
+  }
+
+  .card__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+
+  .card__header-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .card__psa-pop {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: right;
+    margin: 0;
+  }
+
+  .card__psa-pop-link {
+    background: transparent;
+    border: none;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px dashed var(--text-muted);
+    cursor: pointer;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .card__psa-pop-link:hover,
+  .card__psa-pop-link:focus-visible {
+    color: var(--foil-teal);
+    border-color: var(--foil-teal);
+  }
+
+  .psa-modal__view-link {
+    margin: 16px 0 0;
+    font-size: 12px;
+  }
+
+  .psa-modal__view-link a {
+    color: var(--foil-teal);
+    text-decoration: none;
+  }
+
+  .psa-modal__view-link a:hover {
+    text-decoration: underline;
+  }
+
+  .card__psa-pop-arrow {
+    display: inline-block;
+    color: var(--up);
+    font-size: 10px;
+    animation: psaPopBounce 1s ease-in-out infinite;
+  }
+
+  @keyframes psaPopBounce {
+    0%, 100% { transform: translateY(0); opacity: 0.85; }
+    50% { transform: translateY(-3px); opacity: 1; }
+  }
+
+  .card__name {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: 0.01em;
+    margin: 0;
+    color: var(--text);
+    min-width: 0;
+    word-break: break-word;
+  }
+
+  .card__release-date {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* True physical 1-inch height, width constrained to a standard
+     Pokemon card's 2.5:3.5 ratio (5:7) so it never distorts.
+     Bump --card-img-height to e.g. 1.5in or 2in for bigger thumbnails. */
+  .card__thumb {
+    --card-img-height: 2in;
+    height: var(--card-img-height);
+    width: calc(var(--card-img-height) * 5 / 7);
+    object-fit: contain;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--surface-border);
+    flex-shrink: 0;
+  }
+
+  .card__name-link {
+    color: inherit;
+    text-decoration: none;
+    background-image: linear-gradient(90deg, var(--foil-teal), var(--foil-magenta));
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    transition: background-size 0.15s ease;
+    padding-bottom: 1px;
+  }
+
+  .card__name-link:hover,
+  .card__name-link:focus-visible {
+    background-size: 100% 1px;
+  }
+
+  .card__name-link:focus-visible {
+    outline: 2px solid var(--foil-teal);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .card__empty-msg {
+    color: var(--text-muted);
+    font-size: 13px;
+    margin: 0;
+  }
+
+  .card__price-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .card__price {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 30px;
+    font-variant-numeric: tabular-nums;
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: var(--text);
+    cursor: pointer;
+    border-bottom: 1px dashed transparent;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .card__price:hover,
+  .card__price:focus-visible {
+    color: var(--foil-teal);
+    border-color: var(--foil-teal);
+  }
+
+  .card__fee-note {
+    font-size: 10px;
+    color: var(--text-muted);
+    margin: 4px 0 0;
+  }
+
+  .fee-modal__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .fee-modal__list li {
+    font-size: 14px;
+    color: var(--text);
+    padding: 10px 0;
+    border-bottom: 1px solid var(--surface-border);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .fee-modal__list li.fee-modal__profit--up {
+    color: #34d399;
+    font-weight: 700;
+  }
+
+  .fee-modal__list li.fee-modal__profit--down {
+    color: #f87171;
+    font-weight: 700;
+  }
+
+  .fee-modal__list li:last-child {
+    border-bottom: none;
+  }
+
+  .fee-modal__net {
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .badge {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 20px;
+  }
+
+  .badge--up { color: var(--up); background: rgba(52,211,153,0.12); }
+  .badge--down { color: var(--down); background: rgba(248,113,113,0.12); }
+  .badge--flat { color: var(--flat); background: rgba(107,110,125,0.15); }
+
+  .card__bought-cost {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin: 10px 0 2px;
+  }
+
+  .card__profit-line {
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    margin: 0;
+  }
+
+  .profit--up { color: var(--up); }
+  .profit--down { color: var(--down); }
+
+  .card__spark {
+    margin: 14px 0 8px;
+    height: 48px;
+    position: relative;
+  }
+
+  .spark { width: 100%; height: 100%; display: block; }
+
+  .card__spark-dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    margin-left: -4px;
+    margin-top: -4px;
+    border-radius: 50%;
+    animation: sparkDotPulse 1.6s ease-in-out infinite;
+  }
+
+  .card__spark-dot--up { background: #34d399; box-shadow: 0 0 6px 1px rgba(52,211,153,0.6); }
+  .card__spark-dot--down { background: #f87171; box-shadow: 0 0 6px 1px rgba(248,113,113,0.6); }
+  .card__spark-dot--flat { background: #6b6e7d; box-shadow: 0 0 4px 1px rgba(107,110,125,0.5); }
+
+  @keyframes sparkDotPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.6; }
+  }
+
+  .card__trend-label {
+    font-size: 11px;
+    font-weight: 600;
+    margin: 10px 0 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .card__trend-label.trend--up { color: #34d399; }
+  .card__trend-label.trend--down { color: #f87171; }
+  .card__trend-label.trend--flat { color: #6b6e7d; }
+
+  .card__meta {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .card__notes-wrap {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--surface-border);
+  }
+
+  .card__notes {
+    width: 100%;
+    min-height: 44px;
+    resize: vertical;
+    background: var(--bg);
+    border: 1px solid var(--surface-border);
+    border-radius: 6px;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
+    padding: 8px 10px;
+    box-sizing: border-box;
+    transition: border-color 0.15s ease;
+  }
+
+  .card__notes::placeholder {
+    color: var(--text-muted);
+  }
+
+  .card__notes:focus {
+    outline: none;
+    border-color: var(--foil-teal);
+  }
+
+  .card__notes-status {
+    display: block;
+    font-size: 10px;
+    color: var(--up);
+    margin-top: 4px;
+    height: 12px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .card__notes-status.card__notes-status--visible {
+    opacity: 1;
+  }
+
+  .card__sold-btn {
+    display: block;
+    width: 100%;
+    margin-top: 12px;
+    background: transparent;
+    border: 1px solid rgba(248, 113, 113, 0.35);
+    color: var(--down);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 9px 0;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease;
+  }
+
+  .card__sold-btn:hover {
+    background: rgba(248, 113, 113, 0.1);
+    border-color: var(--down);
+  }
+
+  .sell-form__label {
+    display: block;
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 4px 0 6px;
+  }
+
+  .sell-form__input {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--surface-border);
+    border-radius: 6px;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    padding: 10px 12px;
+    box-sizing: border-box;
+  }
+
+  .sell-form__input:focus {
+    outline: none;
+    border-color: var(--foil-teal);
+  }
+
+  .sell-form__hint {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin: 8px 0 16px;
+  }
+
+  .sell-form__submit {
+    width: 100%;
+  }
+
+  .btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1px solid var(--surface-border);
+  }
+
+  .btn--danger {
+    background: rgba(248, 113, 113, 0.12);
+    color: var(--down);
+    border-color: rgba(248, 113, 113, 0.4);
+  }
+
+  .btn--danger:hover {
+    background: rgba(248, 113, 113, 0.2);
+  }
+
+  .status {
+    font-size: 13px;
+    margin: 10px 0 0;
+  }
+
+  .status--ok { color: var(--up); }
+  .status--error { color: var(--down); }
+
+  .card__volume-link {
+    background: transparent;
+    border: none;
+    padding: 0;
+    font: inherit;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--text-muted);
+    cursor: pointer;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .card__volume-link:hover,
+  .card__volume-link:focus-visible {
+    color: var(--foil-teal);
+    border-color: var(--foil-teal);
+  }
+
+  .card__volume-spike {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fbbf24;
+    margin-left: 6px;
+    animation: volumeSpikePulse 1.3s ease-in-out infinite;
+  }
+
+  @keyframes volumeSpikePulse {
+    0%, 100% { opacity: 0.75; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.08); }
+  }
+
+  footer {
+    max-width: 1100px;
+    margin: 48px auto 0;
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: center;
+  }
+</style>
+<!-- Your personal tweaks live in custom.css, loaded after the styles
+     above so anything you set there takes priority. This file is never
+     touched or overwritten by future updates. -->
+<link rel="stylesheet" href="custom.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <linearGradient id="foilGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4fd1c5" />
+      <stop offset="100%" stop-color="#e879f9" />
+    </linearGradient>
+  </defs>
+</svg>
+
+<header>
+  <img src="logo.png" alt="Logo" class="header__logo">
+  <div class="header__right">
+    <div class="header__nav-row">
+      
+      <a class="header__sold-link" href="dashboard.html">PSA10 Dashboard →</a>
+      <a class="header__sold-link" href="raw_sold_portfolio.html" target="_blank" rel="noopener">Sold Portfolio →</a>
+    </div>
+    <div class="updated">Last checked: <span class="updated__time">10:42 AM</span> on 2026-08-25</div>
+  </div>
+</header>
+
+
+    <section class="portfolio">
+      <p class="portfolio__eyebrow">Portfolio value</p>
+      <p class="portfolio__empty">Add a "bought_price" to your cards in config.json to see your total profit/loss here.</p>
+    </section>
+
+
+
+<div class="sortbar">
+  <span class="sortbar__label">Sort by</span>
+  <button class="sort-btn" data-sort="default" onclick="sortCards('default')">Default</button>
+  <button class="sort-btn" data-sort="profitPct" onclick="sortCards('profitPct')">Biggest profit margin</button>
+  <button class="sort-btn active" data-sort="profitAmount" onclick="sortCards('profitAmount')">Biggest profit (¥)</button>
+  <button class="sort-btn" data-sort="lossAmount" onclick="sortCards('lossAmount')">Biggest loss (¥)</button>
+  <button class="sort-btn" data-sort="price" onclick="sortCards('price')">Highest value</button>
+  <button class="sort-btn" data-sort="newest" onclick="sortCards('newest')">Newest Cards</button>
+  <button class="sort-btn" data-sort="oldest" onclick="sortCards('oldest')">Oldest Cards</button>
+  <button class="sort-btn" data-sort="volumeHigh" onclick="sortCards('volumeHigh')">Highest Volume</button>
+  <button class="sort-btn" data-sort="volumeLow" onclick="sortCards('volumeLow')">Lowest Volume</button>
+</div>
+
+<div class="grid">
+
+        <article class="card" data-order="0" data-price="34000" data-profit-pct="-999999" data-profit-amount="-999999999" data-has-profit="0" data-psa-population="-1" data-has-psa="0" data-release-date="-1" data-has-release="0" data-sales-volume="-1" data-has-volume="0" data-card-key="sellModal_Burgerchu_A_Grade">
+          <div class="card__header"><h2 class="card__name"><a class="card__name-link" href="https://snkrdunk.com/apparels/730956/sales-histories" target="_blank" rel="noopener">Burgerchu A Grade</a></h2><div class="card__header-right"><img class="card__thumb" src="data/images/Burgerchu_A_Grade.webp" alt="Burgerchu A Grade" loading="lazy"></div></div>
+          <div class="card__price-row">
+            <button type="button" class="card__price" onclick="openGenericModal('feeModal_Burgerchu_A_Grade')">¥34,000</button>
+            
+          </div>
+          
+          <div class="card__spark"><svg class="spark" viewBox="0 0 220 48"></svg></div>
+          <p class="card__meta">Last sold 1 day ago</p>
+          
+          <div class="card__notes-wrap">
+            <textarea class="card__notes" placeholder="Add a note…" data-key="note:Burgerchu_A_Grade"></textarea>
+            <span class="card__notes-status"></span>
+          </div>
+          <button type="button" class="card__sold-btn" onclick="openGenericModal('sellModal_Burgerchu_A_Grade')">SOLD</button>
+        </article>
+<div id="feeModal_Burgerchu_A_Grade" class="psa-modal-overlay" onclick="closeGenericModalOnOverlay(event, 'feeModal_Burgerchu_A_Grade')">
+  <div class="psa-modal">
+    <div class="psa-modal__header">
+      <h2>Burgerchu A Grade — Sell Now Estimate</h2>
+      <button class="psa-modal__close" onclick="closeGenericModal('feeModal_Burgerchu_A_Grade')" aria-label="Close">&times;</button>
+    </div>
+    <ul class="fee-modal__list">
+      <li>Current price: ¥34,000</li>
+      <li>8.5% SNKRDUNK FEE: -¥2,890</li>
+      <li class="fee-modal__net">Net proceeds after fee: ¥31,110</li>
+      
+    </ul>
+  </div>
+</div>
+<div id="sellModal_Burgerchu_A_Grade" class="psa-modal-overlay" onclick="closeGenericModalOnOverlay(event, 'sellModal_Burgerchu_A_Grade')">
+  <div class="psa-modal">
+    <div class="psa-modal__header">
+      <h2>Burgerchu A Grade — Mark as Sold</h2>
+      <button class="psa-modal__close" onclick="closeGenericModal('sellModal_Burgerchu_A_Grade')" aria-label="Close">&times;</button>
+    </div>
+    <label class="sell-form__label" for="sellPrice_sellModal_Burgerchu_A_Grade">Sold price (¥)</label>
+    <input type="number" min="1" step="1" id="sellPrice_sellModal_Burgerchu_A_Grade" class="sell-form__input" placeholder="e.g. 37900">
+    <p class="sell-form__hint">SNKRDUNK's 8.5% fee is applied automatically to compute your realized profit.</p>
+    <button type="button" class="btn btn--danger sell-form__submit" onclick="submitSale('Burgerchu A Grade', 'sellModal_Burgerchu_A_Grade')">Confirm Sale</button>
+    <p id="sellStatus_sellModal_Burgerchu_A_Grade" class="status"></p>
+    <p class="psa-modal__view-link"><a href="raw_sold_portfolio.html" target="_blank" rel="noopener">View Sold Portfolio →</a></p>
+  </div>
+</div>
+</div>
+
+<footer>
+  Refresh this page after running scraper.py to see updated prices.
+</footer>
+
+<script>
+function openPsaAlertModal() {
+  const overlay = document.getElementById('psaAlertModal');
+  if (overlay) overlay.classList.add('psa-modal-overlay--open');
+}
+
+function closePsaAlertModal() {
+  const overlay = document.getElementById('psaAlertModal');
+  if (overlay) overlay.classList.remove('psa-modal-overlay--open');
+}
+
+function closePsaAlertModalOnOverlay(event) {
+  if (event.target.id === 'psaAlertModal') closePsaAlertModal();
+}
+
+// Generic versions for the per-card sales-history modals (there can be
+// many of these, one per card, so they're parameterized by id).
+function openGenericModal(id) {
+  const overlay = document.getElementById(id);
+  if (overlay) overlay.classList.add('psa-modal-overlay--open');
+}
+
+function closeGenericModal(id) {
+  const overlay = document.getElementById(id);
+  if (overlay) overlay.classList.remove('psa-modal-overlay--open');
+}
+
+function closeGenericModalOnOverlay(event, id) {
+  if (event.target.id === id) closeGenericModal(id);
+}
+
+// Selling a card requires modifying config.json (to stop tracking it) and
+// writing to the sold-portfolio ledger — both real file changes that only
+// config_editor.py's local server can make. This POSTs there; if that
+// server isn't running, it fails gracefully with a clear message rather
+// than silently doing nothing.
+const CONFIG_EDITOR_URL = 'http://127.0.0.1:8765';
+// Which collection this dashboard belongs to — "psa" or "raw" — so
+// config_editor.py knows which config/data files to act on. The raw
+// dashboard template sets this to "raw"; this one stays "psa".
+const PORTFOLIO_KEY = 'raw';
+
+async function submitSale(cardName, modalId) {
+  const input = document.getElementById('sellPrice_' + modalId);
+  const statusEl = document.getElementById('sellStatus_' + modalId);
+  const price = parseInt(input.value, 10);
+
+  if (!price || price <= 0) {
+    statusEl.textContent = 'Enter a valid sold price.';
+    statusEl.className = 'status status--error';
+    return;
+  }
+
+  const confirmed = confirm(
+    'Mark "' + cardName + '" as SOLD for ¥' + price.toLocaleString() + '?\n\n' +
+    'This removes it from your active dashboard and adds it to your Sold Portfolio.\n' +
+    '(Requires config_editor.py to be running.)'
+  );
+  if (!confirmed) return;
+
+  statusEl.textContent = 'Saving…';
+  statusEl.className = 'status';
+
+  // A hard timeout so a stalled connection can never leave this stuck at
+  // "Saving…" forever — after 10 seconds it gives up and shows an error
+  // instead of waiting indefinitely.
+  const controller = new AbortController();
+  const timeoutId = setTimeout(function () { controller.abort(); }, 10000);
+
+  try {
+    const res = await fetch(CONFIG_EDITOR_URL + '/api/sell-card', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: cardName, sold_price: price, portfolio: PORTFOLIO_KEY }),
+      signal: controller.signal
+    });
+    clearTimeout(timeoutId);
+    const result = await res.json();
+    if (!res.ok || !result.ok) throw new Error(result.error || 'Unknown error');
+
+    statusEl.textContent = 'Sold! Removing from dashboard…';
+    statusEl.className = 'status status--ok';
+    setTimeout(function () {
+      closeGenericModal(modalId);
+      const card = document.querySelector('[data-card-key="' + modalId + '"]');
+      if (card) card.remove();
+    }, 800);
+  } catch (err) {
+    clearTimeout(timeoutId);
+    if (err.name === 'AbortError') {
+      statusEl.textContent = 'Timed out after 10s — check config_editor.py is still running, then try again.';
+    } else {
+      statusEl.textContent = 'Could not save — is config_editor.py running? (' + err.message + ')';
+    }
+    statusEl.className = 'status status--error';
+  }
+}
+
+// Notes: saved instantly to this browser's local storage, keyed per card.
+// Loading happens on page load (so any note typed on a previous visit
+// shows up even though the file itself was regenerated by a later scrape),
+// and saving is debounced slightly so it doesn't fire on every keystroke.
+function initCardNotes() {
+  document.querySelectorAll('.card__notes').forEach(function (el) {
+    const key = el.dataset.key;
+    let saveTimeout = null;
+
+    try {
+      const saved = localStorage.getItem(key);
+      if (saved !== null) el.value = saved;
+    } catch (e) {
+      el.placeholder = 'Notes unavailable (browser storage blocked)';
+      el.disabled = true;
+      return;
+    }
+
+    el.addEventListener('input', function () {
+      const statusEl = el.parentElement.querySelector('.card__notes-status');
+      if (statusEl) statusEl.classList.remove('card__notes-status--visible');
+      clearTimeout(saveTimeout);
+      saveTimeout = setTimeout(function () {
+        try {
+          localStorage.setItem(key, el.value);
+          if (statusEl) {
+            statusEl.textContent = 'Saved';
+            statusEl.classList.add('card__notes-status--visible');
+            setTimeout(function () { statusEl.classList.remove('card__notes-status--visible'); }, 1200);
+          }
+        } catch (e) {
+          if (statusEl) {
+            statusEl.textContent = 'Could not save (storage full or blocked)';
+            statusEl.style.color = 'var(--down)';
+            statusEl.classList.add('card__notes-status--visible');
+          }
+        }
+      }, 400);
+    });
+  });
+}
+initCardNotes();
+
+function sortCards(key) {
+  const grid = document.querySelector('.grid');
+  const cards = Array.from(grid.querySelectorAll('.card'));
+  const getVal = (el) => {
+    if (key === 'default') return parseFloat(el.dataset.order);
+    if (key === 'profitPct') return parseFloat(el.dataset.profitPct);
+    if (key === 'profitAmount' || key === 'lossAmount') return parseFloat(el.dataset.profitAmount);
+    if (key === 'price') return parseFloat(el.dataset.price);
+    if (key === 'psaHigh' || key === 'psaLow') return parseFloat(el.dataset.psaPopulation);
+    if (key === 'newest' || key === 'oldest') return parseFloat(el.dataset.releaseDate);
+    if (key === 'volumeHigh' || key === 'volumeLow') return parseFloat(el.dataset.salesVolume);
+    return 0;
+  };
+  // Cards missing the relevant data (no bought_price for profit sorts, no
+  // PSA URL for PSA sorts, no release date found for date sorts, no sales
+  // volume data yet) always sort to the end regardless of direction —
+  // otherwise their placeholder sentinel value would look like a real value.
+  const needsProfitData = key === 'profitPct' || key === 'profitAmount' || key === 'lossAmount';
+  const needsPsaData = key === 'psaHigh' || key === 'psaLow';
+  const needsReleaseData = key === 'newest' || key === 'oldest';
+  const needsVolumeData = key === 'volumeHigh' || key === 'volumeLow';
+  const ascending = key === 'default' || key === 'lossAmount' || key === 'psaLow' || key === 'oldest' || key === 'volumeLow';
+  cards.sort((a, b) => {
+    if (needsProfitData) {
+      const aHas = a.dataset.hasProfit === '1';
+      const bHas = b.dataset.hasProfit === '1';
+      if (aHas !== bHas) return aHas ? -1 : 1;
+    }
+    if (needsPsaData) {
+      const aHas = a.dataset.hasPsa === '1';
+      const bHas = b.dataset.hasPsa === '1';
+      if (aHas !== bHas) return aHas ? -1 : 1;
+    }
+    if (needsReleaseData) {
+      const aHas = a.dataset.hasRelease === '1';
+      const bHas = b.dataset.hasRelease === '1';
+      if (aHas !== bHas) return aHas ? -1 : 1;
+    }
+    if (needsVolumeData) {
+      const aHas = a.dataset.hasVolume === '1';
+      const bHas = b.dataset.hasVolume === '1';
+      if (aHas !== bHas) return aHas ? -1 : 1;
+    }
+    return ascending ? getVal(a) - getVal(b) : getVal(b) - getVal(a);
+  });
+  cards.forEach(c => grid.appendChild(c));
+  document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.sort-btn[data-sort="' + key + '"]').classList.add('active');
+}
+
+sortCards('profitAmount');
+
+function selectRange(key) {
+  document.querySelectorAll('.portfolio__panel').forEach(p => {
+    p.style.display = (p.dataset.rangePanel === key) ? '' : 'none';
+  });
+  document.querySelectorAll('.range-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.range-btn[data-range="' + key + '"]').classList.add('active');
+}
+</script>
+
+</body>
+</html>

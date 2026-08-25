@@ -1127,14 +1127,179 @@
       <a class="header__sold-link" href="dashboard.html">PSA10 Dashboard →</a>
       <a class="header__sold-link" href="raw_sold_portfolio.html" target="_blank" rel="noopener">Sold Portfolio →</a>
     </div>
-    <div class="updated">Last checked: <span class="updated__time">10:50 AM</span> on 2026-08-25</div>
+    <div class="updated">Last checked: <span class="updated__time">11:02 AM</span> on 2026-08-25</div>
   </div>
 </header>
 
 
     <section class="portfolio">
-      <p class="portfolio__eyebrow">Portfolio value</p>
-      <p class="portfolio__empty">Add a "bought_price" to your cards in config.json to see your total profit/loss here.</p>
+      <div class="portfolio__header-row">
+        <p class="portfolio__eyebrow">Portfolio value</p>
+        <div class="range-bar"><button class="range-btn" data-range="1D" onclick="selectRange('1D')">1D</button><button class="range-btn" data-range="1W" onclick="selectRange('1W')">1W</button><button class="range-btn" data-range="1M" onclick="selectRange('1M')">1M</button><button class="range-btn" data-range="3M" onclick="selectRange('3M')">3M</button><button class="range-btn" data-range="1Y" onclick="selectRange('1Y')">1Y</button><button class="range-btn active" data-range="All" onclick="selectRange('All')">All</button></div>
+      </div>
+      
+      <div class="portfolio__panel" data-range-panel="1D" style="display:none;">
+        <div class="portfolio__totals">
+          <span class="portfolio__value">¥1,500</span>
+          <span class="portfolio__badge profit--up">▲ +¥0 (+0.0%)</span>
+        </div>
+        <p class="portfolio__sub">Since Aug 25, 11:02 AM: ¥1,500 → ¥1,500</p>
+        <div class="portfolio__chart"><div class="portfolio__chart-row">
+        <div class="portfolio__chart-ylabels"><span>¥1,500</span><span>¥1,500</span><span>¥1,500</span><span>¥1,500</span></div>
+        <div class="portfolio__chart-plot"><svg class="portfolio__chart-svg" viewBox="0 0 1052 190" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="portfolioFillUp" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#34d399" stop-opacity="0.28" />
+          <stop offset="100%" stop-color="#34d399" stop-opacity="0" />
+        </linearGradient>
+        <linearGradient id="portfolioFillDown" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#f87171" stop-opacity="0.28" />
+          <stop offset="100%" stop-color="#f87171" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+      <line x1="0" y1="182.0" x2="1052" y2="182.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="3 4" opacity="0.18" /><line x1="0" y1="182.0" x2="1052" y2="182.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="3 4" opacity="0.18" /><line x1="0" y1="182.0" x2="1052" y2="182.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="3 4" opacity="0.18" /><line x1="0" y1="182.0" x2="1052" y2="182.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="3 4" opacity="0.18" />
+      <line x1="0" y1="182.0" x2="1052" y2="182.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="5 5" opacity="0.6" />
+      <path d="M 0.0,182.0 L 0.0,182.0 L 1052.0,182.0 L 1052.0,182.0 Z" fill="url(#portfolioFillUp)" stroke="none" />
+      <polyline points="0.0,182.0 1052.0,182.0" fill="none" stroke="#34d399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+    </svg></div>
+      </div>
+      <div class="portfolio__chart-xlabels"><span>8/25</span><span>8/25</span></div></div>
+      </div>
+      <div class="portfolio__panel" data-range-panel="1W" style="display:none;">
+        <div class="portfolio__totals">
+          <span class="portfolio__value">¥1,500</span>
+          <span class="portfolio__badge profit--up">▲ +¥0 (+0.0%)</span>
+        </div>
+        <p class="portfolio__sub">Since Aug 25, 11:02 AM: ¥1,500 → ¥1,500</p>
+        <div class="portfolio__chart"><div class="portfolio__chart-row">
+        <div class="portfolio__chart-ylabels"><span>¥1,500</span><span>¥1,500</span><span>¥1,500</span><span>¥1,500</span></div>
+        <div class="portfolio__chart-plot"><svg class="portfolio__chart-svg" viewBox="0 0 1052 190" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="portfolioFillUp" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#34d399" stop-opacity="0.28" />
+          <stop offset="100%" stop-color="#34d399" stop-opacity="0" />
+        </linearGradient>
+        <linearGradient id="portfolioFillDown" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#f87171" stop-opacity="0.28" />
+          <stop offset="100%" stop-color="#f87171" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+      <line x1="0" y1="182.0" x2="1052" y2="182.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="3 4" opacity="0.18" /><line x1="0" y1="182.0" x2="1052" y2="182.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="3 4" opacity="0.18" /><line x1="0" y1="182.0" x2="1052" y2="182.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="3 4" opacity="0.18" /><line x1="0" y1="182.0" x2="1052" y2="182.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="3 4" opacity="0.18" />
+      <line x1="0" y1="182.0" x2="1052" y2="182.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="5 5" opacity="0.6" />
+      <path d="M 0.0,182.0 L 0.0,182.0 L 1052.0,182.0 L 1052.0,182.0 Z" fill="url(#portfolioFillUp)" stroke="none" />
+      <polyline points="0.0,182.0 1052.0,182.0" fill="none" stroke="#34d399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+    </svg></div>
+      </div>
+      <div class="portfolio__chart-xlabels"><span>8/25</span><span>8/25</span></div></div>
+      </div>
+      <div class="portfolio__panel" data-range-panel="1M" style="display:none;">
+        <div class="portfolio__totals">
+          <span class="portfolio__value">¥1,500</span>
+          <span class="portfolio__badge profit--up">▲ +¥0 (+0.0%)</span>
+        </div>
+        <p class="portfolio__sub">Since Aug 25, 11:02 AM: ¥1,500 → ¥1,500</p>
+        <div class="portfolio__chart"><div class="portfolio__chart-row">
+        <div class="portfolio__chart-ylabels"><span>¥1,500</span><span>¥1,500</span><span>¥1,500</span><span>¥1,500</span></div>
+        <div class="portfolio__chart-plot"><svg class="portfolio__chart-svg" viewBox="0 0 1052 190" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="portfolioFillUp" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#34d399" stop-opacity="0.28" />
+          <stop offset="100%" stop-color="#34d399" stop-opacity="0" />
+        </linearGradient>
+        <linearGradient id="portfolioFillDown" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#f87171" stop-opacity="0.28" />
+          <stop offset="100%" stop-color="#f87171" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+      <line x1="0" y1="182.0" x2="1052" y2="182.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="3 4" opacity="0.18" /><line x1="0" y1="182.0" x2="1052" y2="182.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="3 4" opacity="0.18" /><line x1="0" y1="182.0" x2="1052" y2="182.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="3 4" opacity="0.18" /><line x1="0" y1="182.0" x2="1052" y2="182.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="3 4" opacity="0.18" />
+      <line x1="0" y1="182.0" x2="1052" y2="182.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="5 5" opacity="0.6" />
+      <path d="M 0.0,182.0 L 0.0,182.0 L 1052.0,182.0 L 1052.0,182.0 Z" fill="url(#portfolioFillUp)" stroke="none" />
+      <polyline points="0.0,182.0 1052.0,182.0" fill="none" stroke="#34d399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+    </svg></div>
+      </div>
+      <div class="portfolio__chart-xlabels"><span>8/25</span><span>8/25</span></div></div>
+      </div>
+      <div class="portfolio__panel" data-range-panel="3M" style="display:none;">
+        <div class="portfolio__totals">
+          <span class="portfolio__value">¥1,500</span>
+          <span class="portfolio__badge profit--up">▲ +¥0 (+0.0%)</span>
+        </div>
+        <p class="portfolio__sub">Since Aug 25, 11:02 AM: ¥1,500 → ¥1,500</p>
+        <div class="portfolio__chart"><div class="portfolio__chart-row">
+        <div class="portfolio__chart-ylabels"><span>¥1,500</span><span>¥1,500</span><span>¥1,500</span><span>¥1,500</span></div>
+        <div class="portfolio__chart-plot"><svg class="portfolio__chart-svg" viewBox="0 0 1052 190" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="portfolioFillUp" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#34d399" stop-opacity="0.28" />
+          <stop offset="100%" stop-color="#34d399" stop-opacity="0" />
+        </linearGradient>
+        <linearGradient id="portfolioFillDown" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#f87171" stop-opacity="0.28" />
+          <stop offset="100%" stop-color="#f87171" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+      <line x1="0" y1="182.0" x2="1052" y2="182.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="3 4" opacity="0.18" /><line x1="0" y1="182.0" x2="1052" y2="182.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="3 4" opacity="0.18" /><line x1="0" y1="182.0" x2="1052" y2="182.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="3 4" opacity="0.18" /><line x1="0" y1="182.0" x2="1052" y2="182.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="3 4" opacity="0.18" />
+      <line x1="0" y1="182.0" x2="1052" y2="182.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="5 5" opacity="0.6" />
+      <path d="M 0.0,182.0 L 0.0,182.0 L 1052.0,182.0 L 1052.0,182.0 Z" fill="url(#portfolioFillUp)" stroke="none" />
+      <polyline points="0.0,182.0 1052.0,182.0" fill="none" stroke="#34d399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+    </svg></div>
+      </div>
+      <div class="portfolio__chart-xlabels"><span>8/25</span><span>8/25</span></div></div>
+      </div>
+      <div class="portfolio__panel" data-range-panel="1Y" style="display:none;">
+        <div class="portfolio__totals">
+          <span class="portfolio__value">¥1,500</span>
+          <span class="portfolio__badge profit--up">▲ +¥0 (+0.0%)</span>
+        </div>
+        <p class="portfolio__sub">Since Aug 25, 11:02 AM: ¥1,500 → ¥1,500</p>
+        <div class="portfolio__chart"><div class="portfolio__chart-row">
+        <div class="portfolio__chart-ylabels"><span>¥1,500</span><span>¥1,500</span><span>¥1,500</span><span>¥1,500</span></div>
+        <div class="portfolio__chart-plot"><svg class="portfolio__chart-svg" viewBox="0 0 1052 190" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="portfolioFillUp" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#34d399" stop-opacity="0.28" />
+          <stop offset="100%" stop-color="#34d399" stop-opacity="0" />
+        </linearGradient>
+        <linearGradient id="portfolioFillDown" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#f87171" stop-opacity="0.28" />
+          <stop offset="100%" stop-color="#f87171" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+      <line x1="0" y1="182.0" x2="1052" y2="182.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="3 4" opacity="0.18" /><line x1="0" y1="182.0" x2="1052" y2="182.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="3 4" opacity="0.18" /><line x1="0" y1="182.0" x2="1052" y2="182.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="3 4" opacity="0.18" /><line x1="0" y1="182.0" x2="1052" y2="182.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="3 4" opacity="0.18" />
+      <line x1="0" y1="182.0" x2="1052" y2="182.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="5 5" opacity="0.6" />
+      <path d="M 0.0,182.0 L 0.0,182.0 L 1052.0,182.0 L 1052.0,182.0 Z" fill="url(#portfolioFillUp)" stroke="none" />
+      <polyline points="0.0,182.0 1052.0,182.0" fill="none" stroke="#34d399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+    </svg></div>
+      </div>
+      <div class="portfolio__chart-xlabels"><span>8/25</span><span>8/25</span></div></div>
+      </div>
+      <div class="portfolio__panel" data-range-panel="All">
+        <div class="portfolio__totals">
+          <span class="portfolio__value">¥1,500</span>
+          <span class="portfolio__badge profit--down">▼ -¥1,300 (-46.4%)</span>
+        </div>
+        <p class="portfolio__sub">Bought for ¥2,800 total across 2 of 5 tracked cards</p>
+        <div class="portfolio__chart"><div class="portfolio__chart-row">
+        <div class="portfolio__chart-ylabels"><span>¥2,800</span><span>¥2,367</span><span>¥1,933</span><span>¥1,500</span></div>
+        <div class="portfolio__chart-plot"><svg class="portfolio__chart-svg" viewBox="0 0 1052 190" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="portfolioFillUp" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#34d399" stop-opacity="0.28" />
+          <stop offset="100%" stop-color="#34d399" stop-opacity="0" />
+        </linearGradient>
+        <linearGradient id="portfolioFillDown" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#f87171" stop-opacity="0.28" />
+          <stop offset="100%" stop-color="#f87171" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+      <line x1="0" y1="182.0" x2="1052" y2="182.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="3 4" opacity="0.18" /><line x1="0" y1="124.0" x2="1052" y2="124.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="3 4" opacity="0.18" /><line x1="0" y1="66.0" x2="1052" y2="66.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="3 4" opacity="0.18" /><line x1="0" y1="8.0" x2="1052" y2="8.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="3 4" opacity="0.18" />
+      <line x1="0" y1="8.0" x2="1052" y2="8.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="5 5" opacity="0.6" />
+      <path d="M 0.0,182.0 L 0.0,182.0 L 1052.0,182.0 L 1052.0,182.0 Z" fill="url(#portfolioFillDown)" stroke="none" />
+      <polyline points="0.0,182.0 1052.0,182.0" fill="none" stroke="#f87171" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+    </svg></div>
+      </div>
+      <div class="portfolio__chart-xlabels"><span>8/25</span><span>8/25</span></div></div>
+      </div>
     </section>
 
 
@@ -1158,10 +1323,20 @@
           <div class="card__header"><h2 class="card__name"><a class="card__name-link" href="https://snkrdunk.com/apparels/730956/sales-histories" target="_blank" rel="noopener">Pikachu SAR</a></h2><div class="card__header-right"><img class="card__thumb" src="data/images/Pikachu_SAR.webp" alt="Pikachu SAR" loading="lazy"></div></div>
           <div class="card__price-row">
             <button type="button" class="card__price" onclick="openGenericModal('feeModal_Pikachu_SAR')">¥34,000</button>
-            
+            <span class="badge badge--flat">— no change</span>
           </div>
-          
-          <div class="card__spark"><svg class="spark" viewBox="0 0 220 48"></svg></div>
+          <p class="card__trend-label trend--flat">● +¥0 (+0.0%) vs 7d ago</p>
+          <div class="card__spark"><svg class="spark" viewBox="0 0 220 48" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="sparkFillFlat" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#6b6e7d" stop-opacity="0.25" />
+          <stop offset="100%" stop-color="#6b6e7d" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+      <line x1="0" y1="45.0" x2="220" y2="45.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="3 3" opacity="0.35" />
+      <path d="M 0.0,45.0 L 0.0,45.0 L 220.0,45.0 L 220.0,45.0 Z" fill="url(#sparkFillFlat)" stroke="none" />
+      <polyline points="0.0,45.0 220.0,45.0" fill="none" stroke="#6b6e7d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+    </svg><span class="card__spark-dot card__spark-dot--flat" style="left:100.0%; top:93.8%;"></span></div>
           <p class="card__meta">Last sold 1 day ago</p>
           
           <div class="card__notes-wrap">
@@ -1195,6 +1370,220 @@
     <p class="sell-form__hint">SNKRDUNK's 8.5% fee is applied automatically to compute your realized profit.</p>
     <button type="button" class="btn btn--danger sell-form__submit" onclick="submitSale('Pikachu SAR', 'sellModal_Pikachu_SAR')">Confirm Sale</button>
     <p id="sellStatus_sellModal_Pikachu_SAR" class="status"></p>
+    <p class="psa-modal__view-link"><a href="raw_sold_portfolio.html" target="_blank" rel="noopener">View Sold Portfolio →</a></p>
+  </div>
+</div>
+
+        <article class="card" data-order="1" data-price="4585" data-profit-pct="-999999" data-profit-amount="-999999999" data-has-profit="0" data-psa-population="-1" data-has-psa="0" data-release-date="-1" data-has-release="0" data-sales-volume="-1" data-has-volume="0" data-card-key="sellModal_MEGA_Charizard_X_ex_MA">
+          <div class="card__header"><h2 class="card__name"><a class="card__name-link" href="https://snkrdunk.com/apparels/722239/sales-histories" target="_blank" rel="noopener">MEGA Charizard X ex MA</a></h2><div class="card__header-right"><img class="card__thumb" src="data/images/MEGA_Charizard_X_ex_MA.webp" alt="MEGA Charizard X ex MA" loading="lazy"></div></div>
+          <div class="card__price-row">
+            <button type="button" class="card__price" onclick="openGenericModal('feeModal_MEGA_Charizard_X_ex_MA')">¥4,585</button>
+            
+          </div>
+          
+          <div class="card__spark"><svg class="spark" viewBox="0 0 220 48"></svg></div>
+          <p class="card__meta">Last sold 11 hours ago</p>
+          
+          <div class="card__notes-wrap">
+            <textarea class="card__notes" placeholder="Add a note…" data-key="note:MEGA_Charizard_X_ex_MA"></textarea>
+            <span class="card__notes-status"></span>
+          </div>
+          <button type="button" class="card__sold-btn" onclick="openGenericModal('sellModal_MEGA_Charizard_X_ex_MA')">SOLD</button>
+        </article>
+<div id="feeModal_MEGA_Charizard_X_ex_MA" class="psa-modal-overlay" onclick="closeGenericModalOnOverlay(event, 'feeModal_MEGA_Charizard_X_ex_MA')">
+  <div class="psa-modal">
+    <div class="psa-modal__header">
+      <h2>MEGA Charizard X ex MA — Sell Now Estimate</h2>
+      <button class="psa-modal__close" onclick="closeGenericModal('feeModal_MEGA_Charizard_X_ex_MA')" aria-label="Close">&times;</button>
+    </div>
+    <ul class="fee-modal__list">
+      <li>Current price: ¥4,585</li>
+      <li>8.5% SNKRDUNK FEE: -¥390</li>
+      <li class="fee-modal__net">Net proceeds after fee: ¥4,195</li>
+      
+    </ul>
+  </div>
+</div>
+<div id="sellModal_MEGA_Charizard_X_ex_MA" class="psa-modal-overlay" onclick="closeGenericModalOnOverlay(event, 'sellModal_MEGA_Charizard_X_ex_MA')">
+  <div class="psa-modal">
+    <div class="psa-modal__header">
+      <h2>MEGA Charizard X ex MA — Mark as Sold</h2>
+      <button class="psa-modal__close" onclick="closeGenericModal('sellModal_MEGA_Charizard_X_ex_MA')" aria-label="Close">&times;</button>
+    </div>
+    <label class="sell-form__label" for="sellPrice_sellModal_MEGA_Charizard_X_ex_MA">Sold price (¥)</label>
+    <input type="number" min="1" step="1" id="sellPrice_sellModal_MEGA_Charizard_X_ex_MA" class="sell-form__input" placeholder="e.g. 37900">
+    <p class="sell-form__hint">SNKRDUNK's 8.5% fee is applied automatically to compute your realized profit.</p>
+    <button type="button" class="btn btn--danger sell-form__submit" onclick="submitSale('MEGA Charizard X ex MA', 'sellModal_MEGA_Charizard_X_ex_MA')">Confirm Sale</button>
+    <p id="sellStatus_sellModal_MEGA_Charizard_X_ex_MA" class="status"></p>
+    <p class="psa-modal__view-link"><a href="raw_sold_portfolio.html" target="_blank" rel="noopener">View Sold Portfolio →</a></p>
+  </div>
+</div>
+
+        <article class="card" data-order="2" data-price="2200" data-profit-pct="-999999" data-profit-amount="-999999999" data-has-profit="0" data-psa-population="-1" data-has-psa="0" data-release-date="-1" data-has-release="0" data-sales-volume="-1" data-has-volume="0" data-card-key="sellModal_MEGA_Gengar_ex_MA">
+          <div class="card__header"><h2 class="card__name"><a class="card__name-link" href="https://snkrdunk.com/apparels/730952/sales-histories" target="_blank" rel="noopener">MEGA Gengar ex MA</a></h2><div class="card__header-right"><img class="card__thumb" src="data/images/MEGA_Gengar_ex_MA.webp" alt="MEGA Gengar ex MA" loading="lazy"></div></div>
+          <div class="card__price-row">
+            <button type="button" class="card__price" onclick="openGenericModal('feeModal_MEGA_Gengar_ex_MA')">¥2,200</button>
+            
+          </div>
+          
+          <div class="card__spark"><svg class="spark" viewBox="0 0 220 48"></svg></div>
+          <p class="card__meta">Last sold 58 minutes ago</p>
+          
+          <div class="card__notes-wrap">
+            <textarea class="card__notes" placeholder="Add a note…" data-key="note:MEGA_Gengar_ex_MA"></textarea>
+            <span class="card__notes-status"></span>
+          </div>
+          <button type="button" class="card__sold-btn" onclick="openGenericModal('sellModal_MEGA_Gengar_ex_MA')">SOLD</button>
+        </article>
+<div id="feeModal_MEGA_Gengar_ex_MA" class="psa-modal-overlay" onclick="closeGenericModalOnOverlay(event, 'feeModal_MEGA_Gengar_ex_MA')">
+  <div class="psa-modal">
+    <div class="psa-modal__header">
+      <h2>MEGA Gengar ex MA — Sell Now Estimate</h2>
+      <button class="psa-modal__close" onclick="closeGenericModal('feeModal_MEGA_Gengar_ex_MA')" aria-label="Close">&times;</button>
+    </div>
+    <ul class="fee-modal__list">
+      <li>Current price: ¥2,200</li>
+      <li>8.5% SNKRDUNK FEE: -¥187</li>
+      <li class="fee-modal__net">Net proceeds after fee: ¥2,013</li>
+      
+    </ul>
+  </div>
+</div>
+<div id="sellModal_MEGA_Gengar_ex_MA" class="psa-modal-overlay" onclick="closeGenericModalOnOverlay(event, 'sellModal_MEGA_Gengar_ex_MA')">
+  <div class="psa-modal">
+    <div class="psa-modal__header">
+      <h2>MEGA Gengar ex MA — Mark as Sold</h2>
+      <button class="psa-modal__close" onclick="closeGenericModal('sellModal_MEGA_Gengar_ex_MA')" aria-label="Close">&times;</button>
+    </div>
+    <label class="sell-form__label" for="sellPrice_sellModal_MEGA_Gengar_ex_MA">Sold price (¥)</label>
+    <input type="number" min="1" step="1" id="sellPrice_sellModal_MEGA_Gengar_ex_MA" class="sell-form__input" placeholder="e.g. 37900">
+    <p class="sell-form__hint">SNKRDUNK's 8.5% fee is applied automatically to compute your realized profit.</p>
+    <button type="button" class="btn btn--danger sell-form__submit" onclick="submitSale('MEGA Gengar ex MA', 'sellModal_MEGA_Gengar_ex_MA')">Confirm Sale</button>
+    <p id="sellStatus_sellModal_MEGA_Gengar_ex_MA" class="status"></p>
+    <p class="psa-modal__view-link"><a href="raw_sold_portfolio.html" target="_blank" rel="noopener">View Sold Portfolio →</a></p>
+  </div>
+</div>
+
+        <article class="card card--loss" data-order="3" data-price="1500" data-profit-pct="-8.5333" data-profit-amount="-128" data-has-profit="1" data-psa-population="-1" data-has-psa="0" data-release-date="-1" data-has-release="0" data-sales-volume="-1" data-has-volume="0" data-card-key="sellModal_Kecleon_AR">
+          <div class="card__header"><h2 class="card__name"><a class="card__name-link" href="https://snkrdunk.com/apparels/868598/sales-histories" target="_blank" rel="noopener">Kecleon AR</a></h2><div class="card__header-right"><img class="card__thumb" src="data/images/Kecleon_AR.webp" alt="Kecleon AR" loading="lazy"></div></div>
+          <div class="card__price-row">
+            <button type="button" class="card__price" onclick="openGenericModal('feeModal_Kecleon_AR')">¥1,500</button>
+            <span class="badge badge--flat">— no change</span>
+          </div>
+          <p class="card__bought-cost">Bought ¥1,500</p>
+          <p class="card__profit-line profit--down">▼ -¥128 - (-8.5%)</p>
+          <p class="card__fee-note">After 8.5% fee, net profit</p>
+          <p class="card__trend-label trend--flat">● +¥0 (+0.0%) vs 7d ago</p>
+          <div class="card__spark"><svg class="spark" viewBox="0 0 220 48" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="sparkFillFlat" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#6b6e7d" stop-opacity="0.25" />
+          <stop offset="100%" stop-color="#6b6e7d" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+      <line x1="0" y1="45.0" x2="220" y2="45.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="3 3" opacity="0.35" />
+      <path d="M 0.0,45.0 L 0.0,45.0 L 220.0,45.0 L 220.0,45.0 Z" fill="url(#sparkFillFlat)" stroke="none" />
+      <polyline points="0.0,45.0 220.0,45.0" fill="none" stroke="#6b6e7d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+    </svg><span class="card__spark-dot card__spark-dot--flat" style="left:100.0%; top:93.8%;"></span></div>
+          <p class="card__meta">Last sold 7 hours ago</p>
+          
+          <div class="card__notes-wrap">
+            <textarea class="card__notes" placeholder="Add a note…" data-key="note:Kecleon_AR"></textarea>
+            <span class="card__notes-status"></span>
+          </div>
+          <button type="button" class="card__sold-btn" onclick="openGenericModal('sellModal_Kecleon_AR')">SOLD</button>
+        </article>
+<div id="feeModal_Kecleon_AR" class="psa-modal-overlay" onclick="closeGenericModalOnOverlay(event, 'feeModal_Kecleon_AR')">
+  <div class="psa-modal">
+    <div class="psa-modal__header">
+      <h2>Kecleon AR — Sell Now Estimate</h2>
+      <button class="psa-modal__close" onclick="closeGenericModal('feeModal_Kecleon_AR')" aria-label="Close">&times;</button>
+    </div>
+    <ul class="fee-modal__list">
+      <li>Current price: ¥1,500</li>
+      <li>8.5% SNKRDUNK FEE: -¥128</li>
+      <li class="fee-modal__net">Net proceeds after fee: ¥1,372</li>
+      
+      <li>Bought price: ¥1,500</li>
+      <li class="fee-modal__profit--down">
+        Net profit/loss: -¥128
+      </li>
+    </ul>
+  </div>
+</div>
+<div id="sellModal_Kecleon_AR" class="psa-modal-overlay" onclick="closeGenericModalOnOverlay(event, 'sellModal_Kecleon_AR')">
+  <div class="psa-modal">
+    <div class="psa-modal__header">
+      <h2>Kecleon AR — Mark as Sold</h2>
+      <button class="psa-modal__close" onclick="closeGenericModal('sellModal_Kecleon_AR')" aria-label="Close">&times;</button>
+    </div>
+    <label class="sell-form__label" for="sellPrice_sellModal_Kecleon_AR">Sold price (¥)</label>
+    <input type="number" min="1" step="1" id="sellPrice_sellModal_Kecleon_AR" class="sell-form__input" placeholder="e.g. 37900">
+    <p class="sell-form__hint">SNKRDUNK's 8.5% fee is applied automatically to compute your realized profit.</p>
+    <button type="button" class="btn btn--danger sell-form__submit" onclick="submitSale('Kecleon AR', 'sellModal_Kecleon_AR')">Confirm Sale</button>
+    <p id="sellStatus_sellModal_Kecleon_AR" class="status"></p>
+    <p class="psa-modal__view-link"><a href="raw_sold_portfolio.html" target="_blank" rel="noopener">View Sold Portfolio →</a></p>
+  </div>
+</div>
+
+        <article class="card card--profit" data-order="4" data-price="1500" data-profit-pct="5.5385" data-profit-amount="72" data-has-profit="1" data-psa-population="-1" data-has-psa="0" data-release-date="-1" data-has-release="0" data-sales-volume="-1" data-has-volume="0" data-card-key="sellModal_Kecleon_AR">
+          <div class="card__header"><h2 class="card__name"><a class="card__name-link" href="https://snkrdunk.com/apparels/868598/sales-histories" target="_blank" rel="noopener">Kecleon AR</a></h2><div class="card__header-right"><img class="card__thumb" src="data/images/Kecleon_AR.webp" alt="Kecleon AR" loading="lazy"></div></div>
+          <div class="card__price-row">
+            <button type="button" class="card__price" onclick="openGenericModal('feeModal_Kecleon_AR')">¥1,500</button>
+            <span class="badge badge--flat">— no change</span>
+          </div>
+          <p class="card__bought-cost">Bought ¥1,300</p>
+          <p class="card__profit-line profit--up">▲ +¥72 - (+5.5%)</p>
+          <p class="card__fee-note">After 8.5% fee, net profit</p>
+          <p class="card__trend-label trend--flat">● +¥0 (+0.0%) vs 7d ago</p>
+          <div class="card__spark"><svg class="spark" viewBox="0 0 220 48" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="sparkFillFlat" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#6b6e7d" stop-opacity="0.25" />
+          <stop offset="100%" stop-color="#6b6e7d" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+      <line x1="0" y1="45.0" x2="220" y2="45.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="3 3" opacity="0.35" />
+      <path d="M 0.0,45.0 L 0.0,45.0 L 220.0,45.0 L 220.0,45.0 Z" fill="url(#sparkFillFlat)" stroke="none" />
+      <polyline points="0.0,45.0 220.0,45.0" fill="none" stroke="#6b6e7d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+    </svg><span class="card__spark-dot card__spark-dot--flat" style="left:100.0%; top:93.8%;"></span></div>
+          <p class="card__meta">Last sold 7 hours ago</p>
+          
+          <div class="card__notes-wrap">
+            <textarea class="card__notes" placeholder="Add a note…" data-key="note:Kecleon_AR"></textarea>
+            <span class="card__notes-status"></span>
+          </div>
+          <button type="button" class="card__sold-btn" onclick="openGenericModal('sellModal_Kecleon_AR')">SOLD</button>
+        </article>
+<div id="feeModal_Kecleon_AR" class="psa-modal-overlay" onclick="closeGenericModalOnOverlay(event, 'feeModal_Kecleon_AR')">
+  <div class="psa-modal">
+    <div class="psa-modal__header">
+      <h2>Kecleon AR — Sell Now Estimate</h2>
+      <button class="psa-modal__close" onclick="closeGenericModal('feeModal_Kecleon_AR')" aria-label="Close">&times;</button>
+    </div>
+    <ul class="fee-modal__list">
+      <li>Current price: ¥1,500</li>
+      <li>8.5% SNKRDUNK FEE: -¥128</li>
+      <li class="fee-modal__net">Net proceeds after fee: ¥1,372</li>
+      
+      <li>Bought price: ¥1,300</li>
+      <li class="fee-modal__profit--up">
+        Net profit/loss: +¥72
+      </li>
+    </ul>
+  </div>
+</div>
+<div id="sellModal_Kecleon_AR" class="psa-modal-overlay" onclick="closeGenericModalOnOverlay(event, 'sellModal_Kecleon_AR')">
+  <div class="psa-modal">
+    <div class="psa-modal__header">
+      <h2>Kecleon AR — Mark as Sold</h2>
+      <button class="psa-modal__close" onclick="closeGenericModal('sellModal_Kecleon_AR')" aria-label="Close">&times;</button>
+    </div>
+    <label class="sell-form__label" for="sellPrice_sellModal_Kecleon_AR">Sold price (¥)</label>
+    <input type="number" min="1" step="1" id="sellPrice_sellModal_Kecleon_AR" class="sell-form__input" placeholder="e.g. 37900">
+    <p class="sell-form__hint">SNKRDUNK's 8.5% fee is applied automatically to compute your realized profit.</p>
+    <button type="button" class="btn btn--danger sell-form__submit" onclick="submitSale('Kecleon AR', 'sellModal_Kecleon_AR')">Confirm Sale</button>
+    <p id="sellStatus_sellModal_Kecleon_AR" class="status"></p>
     <p class="psa-modal__view-link"><a href="raw_sold_portfolio.html" target="_blank" rel="noopener">View Sold Portfolio →</a></p>
   </div>
 </div>

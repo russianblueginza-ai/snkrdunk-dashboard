@@ -269,7 +269,7 @@
 
 <header>
   <h1>SOLD <span>PORTFOLIO</span></h1>
-  <div class="updated">Last checked: <span class="updated__time">9:51 AM</span> on 2026-08-25</div>
+  <div class="updated">Last checked: <span class="updated__time">10:51 AM</span> on 2026-08-25</div>
 </header>
 
 <p style="max-width:1100px;margin:0 auto 20px;"><a class="back-link" href="dashboard.html">← Back to Dashboard</a></p>
@@ -324,6 +324,10 @@
 
 <script>
 const CONFIG_EDITOR_URL = 'http://127.0.0.1:8765';
+// Which collection this sold-portfolio page belongs to — "psa" or "raw" —
+// so config_editor.py knows which sold-portfolio file to modify. Set by
+// the page itself when it's generated.
+const PORTFOLIO_KEY = 'psa';
 
 async function deleteSoldRecord(id, btnEl) {
   const row = btnEl.closest('tr');
@@ -344,7 +348,7 @@ async function deleteSoldRecord(id, btnEl) {
     const res = await fetch(CONFIG_EDITOR_URL + '/api/delete-sold', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: id }),
+      body: JSON.stringify({ id: id, portfolio: PORTFOLIO_KEY }),
       signal: controller.signal
     });
     clearTimeout(timeoutId);
@@ -373,7 +377,7 @@ async function toggleSoldTracking(id, checkboxEl) {
     const res = await fetch(CONFIG_EDITOR_URL + '/api/toggle-sold-tracking', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: id, tracked: wantsTracked }),
+      body: JSON.stringify({ id: id, tracked: wantsTracked, portfolio: PORTFOLIO_KEY }),
       signal: controller.signal
     });
     clearTimeout(timeoutId);

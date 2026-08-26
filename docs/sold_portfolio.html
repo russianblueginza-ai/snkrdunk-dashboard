@@ -188,6 +188,34 @@
   .sold-table .profit--up { color: var(--up); font-weight: 600; }
   .sold-table .profit--down { color: var(--down); font-weight: 600; }
 
+  /* Sold Price / Net / Current Price columns get a subtle transparent
+     tint plus a colored underline on the header, purely to make it
+     easier to visually track each figure across a row at a glance —
+     not meant to imply good/bad, just three distinct "price" columns. */
+  .sold-table__col-sold {
+    background: rgba(248, 113, 113, 0.07);
+  }
+
+  th.sold-table__col-sold {
+    box-shadow: inset 0 -2px 0 0 var(--down);
+  }
+
+  .sold-table__col-net {
+    background: rgba(52, 211, 153, 0.07);
+  }
+
+  th.sold-table__col-net {
+    box-shadow: inset 0 -2px 0 0 var(--up);
+  }
+
+  .sold-table__col-current {
+    background: rgba(251, 191, 36, 0.07);
+  }
+
+  th.sold-table__col-current {
+    box-shadow: inset 0 -2px 0 0 #fbbf24;
+  }
+
   .sold-row__na { color: var(--text-muted); }
 
   .sold-row__name-link {
@@ -269,7 +297,7 @@
 
 <header>
   <h1>SOLD <span>PORTFOLIO</span></h1>
-  <div class="updated">Last checked: <span class="updated__time">10:52 AM</span> on 2026-08-26</div>
+  <div class="updated">Last checked: <span class="updated__time">11:51 AM</span> on 2026-08-26</div>
 </header>
 
 <p style="max-width:1100px;margin:0 auto 20px;"><a class="back-link" href="dashboard.html">← Back to Dashboard</a></p>
@@ -289,7 +317,7 @@
       <table class="sold-table">
         <thead>
           <tr>
-            <th>Card</th><th>Sold</th><th>Bought</th><th>Sold Price</th><th>Fee</th><th>Net</th><th>Profit</th><th>Current Price</th><th></th>
+            <th>Card</th><th>Sold</th><th>Bought</th><th class="sold-table__col-sold">Sold Price</th><th>Fee</th><th class="sold-table__col-net">Net</th><th>Profit</th><th class="sold-table__col-current">Current Price</th><th></th>
           </tr>
         </thead>
         <tbody>
@@ -297,22 +325,22 @@
           <td><a class="sold-row__name-link" href="https://snkrdunk.com/apparels/135232/sales-histories" target="_blank" rel="noopener">Detective Pikachu: PROMO</a></td>
           <td>Aug 24, 2026</td>
           <td>¥46,500</td>
-          <td>¥57,999</td>
+          <td class="sold-table__col-sold">¥57,999</td>
           <td>-¥4,930</td>
-          <td>¥53,069</td>
+          <td class="sold-table__col-net">¥53,069</td>
           <td><span class="profit--up">▲ +¥6,569</span></td>
-          <td>¥56,999<br><label class="sold-row__track"><input type="checkbox" checked onchange="toggleSoldTracking('d8575c5bf3f44643ac24a93b050d93a4', this)"> Track</label></td>
+          <td class="sold-table__col-current">¥56,999<br><label class="sold-row__track"><input type="checkbox" checked onchange="toggleSoldTracking('d8575c5bf3f44643ac24a93b050d93a4', this)"> Track</label></td>
           <td><button type="button" class="sold-row__delete" onclick="deleteSoldRecord('d8575c5bf3f44643ac24a93b050d93a4', this)">Delete</button></td>
         </tr>
         <tr>
           <td><a class="sold-row__name-link" href="https://snkrdunk.com/apparels/96729/sales-histories" target="_blank" rel="noopener">Umbreon VMAX CSR</a></td>
           <td>Aug 21, 2026</td>
           <td>¥28,000</td>
-          <td>¥37,900</td>
+          <td class="sold-table__col-sold">¥37,900</td>
           <td>-¥3,222</td>
-          <td>¥34,678</td>
+          <td class="sold-table__col-net">¥34,678</td>
           <td><span class="profit--up">▲ +¥6,678</span></td>
-          <td>¥35,500<br><label class="sold-row__track"><input type="checkbox" checked onchange="toggleSoldTracking('f882ad9d384346779c8d8d75754ab606', this)"> Track</label></td>
+          <td class="sold-table__col-current">¥35,500<br><label class="sold-row__track"><input type="checkbox" checked onchange="toggleSoldTracking('f882ad9d384346779c8d8d75754ab606', this)"> Track</label></td>
           <td><button type="button" class="sold-row__delete" onclick="deleteSoldRecord('f882ad9d384346779c8d8d75754ab606', this)">Delete</button></td>
         </tr></tbody>
       </table>

@@ -1161,7 +1161,7 @@
       <a class="header__nav-icon-link" href="dashboard.html"><img class="header__nav-icon" src="data/images/psa10-icon.png" alt="PSA10 Dashboard →" title="PSA10 Dashboard →"></a>
       <a class="header__nav-icon-link" href="raw_sold_portfolio.html" target="_blank" rel="noopener"><img class="header__nav-icon" src="data/images/sold-icon.png" alt="Sold Portfolio →" title="Sold Portfolio →"></a>
     </div>
-    <div class="updated">Last checked: <span class="updated__time">8:52 PM</span> on 2026-08-31</div>
+    <div class="updated">Last checked: <span class="updated__time">9:35 PM</span> on 2026-08-31</div>
   </div>
 </header>
 
@@ -1177,7 +1177,7 @@
           <span class="portfolio__value">¥42,711</span>
           <span class="portfolio__badge profit--down">▼ -¥1,889 (-4.2%)</span>
         </div>
-        <p class="portfolio__sub">Since Aug 30, 8:52 PM: ¥44,600 → ¥42,711</p>
+        <p class="portfolio__sub">Since Aug 30, 9:35 PM: ¥44,600 → ¥42,711</p>
         <div class="portfolio__chart"><div class="portfolio__chart-row">
         <div class="portfolio__chart-ylabels"><span>¥45,000</span><span>¥43,800</span><span>¥42,600</span></div>
         <div class="portfolio__chart-plot"><svg class="portfolio__chart-svg" viewBox="0 0 1052 190" preserveAspectRatio="none">
@@ -1346,11 +1346,15 @@
   <button class="sort-btn" data-sort="lossAmount" onclick="sortCards('lossAmount')">Biggest loss (¥)</button>
   <button class="sort-btn" data-sort="price" onclick="sortCards('price')">Highest value</button>
   <button class="sort-btn" data-sort="priceLow" onclick="sortCards('priceLow')">Lowest value</button>
+  <button class="sort-btn" data-sort="change24hGain" onclick="sortCards('change24hGain')">24h: Biggest Gain</button>
+  <button class="sort-btn" data-sort="change24hDrop" onclick="sortCards('change24hDrop')">24h: Biggest Drop</button>
+  <button class="sort-btn" data-sort="change7dGain" onclick="sortCards('change7dGain')">7d: Biggest Gain</button>
+  <button class="sort-btn" data-sort="change7dDrop" onclick="sortCards('change7dDrop')">7d: Biggest Drop</button>
 </div>
 
 <div class="grid">
 
-        <article class="card" data-order="0" data-price="33000" data-profit-pct="-999999" data-profit-amount="-999999999" data-has-profit="0" data-psa-population="-1" data-has-psa="0" data-release-date="-1" data-has-release="0" data-sales-volume="-1" data-has-volume="0" data-card-key="sellModal_Pikachu_SAR">
+        <article class="card" data-order="0" data-price="33000" data-profit-pct="-999999" data-profit-amount="-999999999" data-has-profit="0" data-psa-population="-1" data-has-psa="0" data-release-date="-1" data-has-release="0" data-sales-volume="-1" data-has-volume="0" data-change24h="-2000" data-has-change24h="1" data-change7d="-1000" data-has-change7d="1" data-card-key="sellModal_Pikachu_SAR">
           <div class="card__header"><h2 class="card__name"><a class="card__name-link" href="https://snkrdunk.com/apparels/730956/sales-histories" target="_blank" rel="noopener">Pikachu SAR</a></h2><div class="card__header-right"><img class="card__thumb" src="data/images/Pikachu_SAR.webp" alt="Pikachu SAR" loading="lazy"></div></div>
           <div class="card__price-row">
             <button type="button" class="card__price" onclick="openGenericModal('feeModal_Pikachu_SAR')">¥33,000</button>
@@ -1405,7 +1409,7 @@
   </div>
 </div>
 
-        <article class="card" data-order="1" data-price="4600" data-profit-pct="-999999" data-profit-amount="-999999999" data-has-profit="0" data-psa-population="-1" data-has-psa="0" data-release-date="-1" data-has-release="0" data-sales-volume="-1" data-has-volume="0" data-card-key="sellModal_MEGA_Charizard_X_ex_MA">
+        <article class="card" data-order="1" data-price="4600" data-profit-pct="-999999" data-profit-amount="-999999999" data-has-profit="0" data-psa-population="-1" data-has-psa="0" data-release-date="-1" data-has-release="0" data-sales-volume="-1" data-has-volume="0" data-change24h="0" data-has-change24h="1" data-change7d="15" data-has-change7d="1" data-card-key="sellModal_MEGA_Charizard_X_ex_MA">
           <div class="card__header"><h2 class="card__name"><a class="card__name-link" href="https://snkrdunk.com/apparels/722239/sales-histories" target="_blank" rel="noopener">MEGA Charizard X ex MA</a></h2><div class="card__header-right"><img class="card__thumb" src="data/images/MEGA_Charizard_X_ex_MA.webp" alt="MEGA Charizard X ex MA" loading="lazy"></div></div>
           <div class="card__price-row">
             <button type="button" class="card__price" onclick="openGenericModal('feeModal_MEGA_Charizard_X_ex_MA')">¥4,600</button>
@@ -1460,7 +1464,7 @@
   </div>
 </div>
 
-        <article class="card" data-order="2" data-price="4000" data-profit-pct="-999999" data-profit-amount="-999999999" data-has-profit="0" data-psa-population="-1" data-has-psa="0" data-release-date="-1" data-has-release="0" data-sales-volume="-1" data-has-volume="0" data-card-key="sellModal_MEGA_Gengar_ex_MA">
+        <article class="card" data-order="2" data-price="4000" data-profit-pct="-999999" data-profit-amount="-999999999" data-has-profit="0" data-psa-population="-1" data-has-psa="0" data-release-date="-1" data-has-release="0" data-sales-volume="-1" data-has-volume="0" data-change24h="0" data-has-change24h="1" data-change7d="1800" data-has-change7d="1" data-card-key="sellModal_MEGA_Gengar_ex_MA">
           <div class="card__header"><h2 class="card__name"><a class="card__name-link" href="https://snkrdunk.com/apparels/730952/sales-histories" target="_blank" rel="noopener">MEGA Gengar ex MA</a></h2><div class="card__header-right"><img class="card__thumb" src="data/images/MEGA_Gengar_ex_MA.webp" alt="MEGA Gengar ex MA" loading="lazy"></div></div>
           <div class="card__price-row">
             <button type="button" class="card__price" onclick="openGenericModal('feeModal_MEGA_Gengar_ex_MA')">¥4,000</button>
@@ -1515,7 +1519,7 @@
   </div>
 </div>
 
-        <article class="card card--loss" data-order="3" data-price="1111" data-profit-pct="-32.2000" data-profit-amount="-483" data-has-profit="1" data-psa-population="-1" data-has-psa="0" data-release-date="-1" data-has-release="0" data-sales-volume="-1" data-has-volume="0" data-card-key="sellModal_Kecleon_AR">
+        <article class="card card--loss" data-order="3" data-price="1111" data-profit-pct="-32.2000" data-profit-amount="-483" data-has-profit="1" data-psa-population="-1" data-has-psa="0" data-release-date="-1" data-has-release="0" data-sales-volume="-1" data-has-volume="0" data-change24h="111" data-has-change24h="1" data-change7d="-389" data-has-change7d="1" data-card-key="sellModal_Kecleon_AR">
           <div class="card__header"><h2 class="card__name"><a class="card__name-link" href="https://snkrdunk.com/apparels/868598/sales-histories" target="_blank" rel="noopener">Kecleon AR</a></h2><div class="card__header-right"><img class="card__thumb" src="data/images/Kecleon_AR.webp" alt="Kecleon AR" loading="lazy"></div></div>
           <div class="card__price-row">
             <button type="button" class="card__price" onclick="openGenericModal('feeModal_Kecleon_AR')">¥1,111</button>
@@ -1577,7 +1581,7 @@
   </div>
 </div>
 
-        <article class="card card--loss" data-order="4" data-price="1111" data-profit-pct="-21.7692" data-profit-amount="-283" data-has-profit="1" data-psa-population="-1" data-has-psa="0" data-release-date="-1" data-has-release="0" data-sales-volume="-1" data-has-volume="0" data-card-key="sellModal_Kecleon_AR">
+        <article class="card card--loss" data-order="4" data-price="1111" data-profit-pct="-21.7692" data-profit-amount="-283" data-has-profit="1" data-psa-population="-1" data-has-psa="0" data-release-date="-1" data-has-release="0" data-sales-volume="-1" data-has-volume="0" data-change24h="111" data-has-change24h="1" data-change7d="-389" data-has-change7d="1" data-card-key="sellModal_Kecleon_AR">
           <div class="card__header"><h2 class="card__name"><a class="card__name-link" href="https://snkrdunk.com/apparels/868598/sales-histories" target="_blank" rel="noopener">Kecleon AR</a></h2><div class="card__header-right"><img class="card__thumb" src="data/images/Kecleon_AR.webp" alt="Kecleon AR" loading="lazy"></div></div>
           <div class="card__price-row">
             <button type="button" class="card__price" onclick="openGenericModal('feeModal_Kecleon_AR')">¥1,111</button>
@@ -1796,19 +1800,23 @@ function sortCards(key) {
     if (key === 'psaHigh' || key === 'psaLow') return parseFloat(el.dataset.psaPopulation);
     if (key === 'newest' || key === 'oldest') return parseFloat(el.dataset.releaseDate);
     if (key === 'volumeHigh' || key === 'volumeLow') return parseFloat(el.dataset.salesVolume);
+    if (key === 'change24hGain' || key === 'change24hDrop') return parseFloat(el.dataset.change24h);
+    if (key === 'change7dGain' || key === 'change7dDrop') return parseFloat(el.dataset.change7d);
     return 0;
   };
   // Cards missing the relevant data (no bought_price for profit sorts, no
   // PSA URL for PSA sorts, no release date found for date sorts, no sales
-  // volume data yet, no price fetched yet) always sort to the end
-  // regardless of direction — otherwise their placeholder sentinel value
-  // would look like a real value.
+  // volume data yet, no price fetched yet, no 24h/7d comparison point yet)
+  // always sort to the end regardless of direction — otherwise their
+  // placeholder sentinel value would look like a real value.
   const needsProfitData = key === 'profitPct' || key === 'profitAmount' || key === 'lossAmount';
   const needsPsaData = key === 'psaHigh' || key === 'psaLow';
   const needsReleaseData = key === 'newest' || key === 'oldest';
   const needsVolumeData = key === 'volumeHigh' || key === 'volumeLow';
   const needsPriceData = key === 'priceLow';
-  const ascending = key === 'default' || key === 'lossAmount' || key === 'psaLow' || key === 'oldest' || key === 'volumeLow' || key === 'priceLow';
+  const needsChange24hData = key === 'change24hGain' || key === 'change24hDrop';
+  const needsChange7dData = key === 'change7dGain' || key === 'change7dDrop';
+  const ascending = key === 'default' || key === 'lossAmount' || key === 'psaLow' || key === 'oldest' || key === 'volumeLow' || key === 'priceLow' || key === 'change24hDrop' || key === 'change7dDrop';
   cards.sort((a, b) => {
     if (needsProfitData) {
       const aHas = a.dataset.hasProfit === '1';
@@ -1818,6 +1826,16 @@ function sortCards(key) {
     if (needsPsaData) {
       const aHas = a.dataset.hasPsa === '1';
       const bHas = b.dataset.hasPsa === '1';
+      if (aHas !== bHas) return aHas ? -1 : 1;
+    }
+    if (needsChange24hData) {
+      const aHas = a.dataset.hasChange24h === '1';
+      const bHas = b.dataset.hasChange24h === '1';
+      if (aHas !== bHas) return aHas ? -1 : 1;
+    }
+    if (needsChange7dData) {
+      const aHas = a.dataset.hasChange7d === '1';
+      const bHas = b.dataset.hasChange7d === '1';
       if (aHas !== bHas) return aHas ? -1 : 1;
     }
     if (needsPriceData) {

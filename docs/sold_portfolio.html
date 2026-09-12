@@ -230,6 +230,219 @@
     opacity: 0.75;
   }
 
+  .sold-row__psa-link {
+    background: transparent;
+    border: none;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px dashed var(--text-muted);
+    cursor: pointer;
+  }
+
+  .sold-row__psa-link:hover {
+    color: var(--text);
+    border-bottom-color: var(--foil-teal);
+  }
+
+  .sold-psa-modal__stats {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .sold-psa-modal__stat {
+    flex: 1;
+    background: var(--bg);
+    border: 1px solid var(--surface-border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .sold-psa-modal__stat-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .sold-psa-modal__stat-value {
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .sold-psa-modal__delta--up { color: var(--up); }
+  .sold-psa-modal__delta--down { color: var(--down); }
+
+  .psa-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .psa-modal-overlay.psa-modal-overlay--open {
+    display: flex;
+  }
+
+  .psa-modal {
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    border-radius: 12px;
+    max-width: 560px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 24px;
+    position: relative;
+  }
+
+  .psa-modal::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--foil-teal), var(--foil-magenta));
+    border-radius: 12px 12px 0 0;
+  }
+
+  .psa-modal--wide {
+    max-width: 640px;
+  }
+
+  .psa-modal__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .psa-modal__header h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text);
+  }
+
+  .psa-modal__close {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 4px 8px;
+  }
+
+  .psa-modal__summary {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin: -8px 0 14px;
+  }
+
+  .psa-modal__view-link {
+    margin: 16px 0 0;
+    font-size: 12px;
+  }
+
+  .psa-modal__view-link a {
+    color: var(--foil-teal);
+    text-decoration: none;
+  }
+
+  .volume-chart {
+    margin: 0 0 18px;
+  }
+
+  .volume-chart__bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 120px;
+    padding-top: 8px;
+    border-bottom: 1px solid var(--surface-border);
+  }
+
+  .volume-chart__bar-col {
+    flex: 1;
+    min-width: 4px;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .volume-chart__bar {
+    width: 100%;
+    background: var(--foil-teal);
+    border-radius: 2px 2px 0 0;
+    opacity: 0.85;
+    transition: opacity 0.15s ease;
+  }
+
+  .volume-chart__labels {
+    display: flex;
+    gap: 3px;
+    margin-top: 5px;
+  }
+
+  .volume-chart__label-col {
+    flex: 1;
+    min-width: 4px;
+    text-align: center;
+    font-size: 9px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+    overflow: visible;
+  }
+
+  .volume-table-wrap {
+    max-height: 260px;
+    overflow-y: auto;
+    border-top: 1px solid var(--surface-border);
+  }
+
+  .volume-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .volume-table th {
+    position: sticky;
+    top: 0;
+    background: var(--surface);
+    text-align: left;
+    padding: 10px 4px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+  }
+
+  .volume-table td {
+    padding: 8px 4px;
+    border-bottom: 1px solid var(--surface-border);
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .volume-table tr:last-child td { border-bottom: none; }
+
   .sold-row__name-link {
     color: var(--text);
     text-decoration: none;
@@ -309,7 +522,7 @@
 
 <header>
   <h1>SOLD <span>PORTFOLIO</span></h1>
-  <div class="updated">Last checked: <span class="updated__time">3:50 PM</span> on 2026-09-12</div>
+  <div class="updated">Last checked: <span class="updated__time">4:39 PM</span> on 2026-09-12</div>
 </header>
 
 <p style="max-width:1100px;margin:0 auto 20px;"><a class="back-link" href="dashboard.html">← Back to Dashboard</a></p>
@@ -334,7 +547,7 @@
         </thead>
         <tbody>
         <tr>
-          <td><a class="sold-row__name-link" href="https://snkrdunk.com/apparels/704401/sales-histories" target="_blank" rel="noopener">Mega Charizard Xex SAR</a><div class="sold-row__psa">PSA Population: 51,612</div></td>
+          <td><a class="sold-row__name-link" href="https://snkrdunk.com/apparels/704401/sales-histories" target="_blank" rel="noopener">Mega Charizard Xex SAR</a><div class="sold-row__psa"><button type="button" class="sold-row__psa-link" onclick="openGenericModal('soldPsaModal_77f72b5e577e48c4ad00b35c2b53c7ec')">PSA Population: 51,612</button></div></td>
           <td>Sep 05, 2026</td>
           <td>¥165,000</td>
           <td class="sold-table__col-sold">¥152,900</td>
@@ -345,18 +558,18 @@
           <td><button type="button" class="sold-row__delete" onclick="deleteSoldRecord('77f72b5e577e48c4ad00b35c2b53c7ec', this)">Delete</button></td>
         </tr>
         <tr>
-          <td><a class="sold-row__name-link" href="https://snkrdunk.com/apparels/135232/sales-histories" target="_blank" rel="noopener">Detective Pikachu: PROMO</a><div class="sold-row__psa">PSA Population: 48,929</div></td>
+          <td><a class="sold-row__name-link" href="https://snkrdunk.com/apparels/135232/sales-histories" target="_blank" rel="noopener">Detective Pikachu: PROMO</a><div class="sold-row__psa"><button type="button" class="sold-row__psa-link" onclick="openGenericModal('soldPsaModal_d8575c5bf3f44643ac24a93b050d93a4')">PSA Population: 48,929</button></div></td>
           <td>Aug 24, 2026</td>
           <td>¥46,500</td>
           <td class="sold-table__col-sold">¥57,999</td>
           <td>-¥4,930</td>
           <td class="sold-table__col-net">¥53,069</td>
           <td><span class="profit--up">▲ +¥6,569</span></td>
-          <td class="sold-table__col-current"><span class="sold-row__rebuy" title="Back at or below your bought price">¥46,300 🔔</span><br><label class="sold-row__track"><input type="checkbox" checked onchange="toggleSoldTracking('d8575c5bf3f44643ac24a93b050d93a4', this)"> Track</label></td>
+          <td class="sold-table__col-current">¥47,500<br><label class="sold-row__track"><input type="checkbox" checked onchange="toggleSoldTracking('d8575c5bf3f44643ac24a93b050d93a4', this)"> Track</label></td>
           <td><button type="button" class="sold-row__delete" onclick="deleteSoldRecord('d8575c5bf3f44643ac24a93b050d93a4', this)">Delete</button></td>
         </tr>
         <tr>
-          <td><a class="sold-row__name-link" href="https://snkrdunk.com/apparels/96729/sales-histories" target="_blank" rel="noopener">Umbreon VMAX CSR</a><div class="sold-row__psa">PSA Population: 8,567</div></td>
+          <td><a class="sold-row__name-link" href="https://snkrdunk.com/apparels/96729/sales-histories" target="_blank" rel="noopener">Umbreon VMAX CSR</a><div class="sold-row__psa"><button type="button" class="sold-row__psa-link" onclick="openGenericModal('soldPsaModal_f882ad9d384346779c8d8d75754ab606')">PSA Population: 8,567</button></div></td>
           <td>Aug 21, 2026</td>
           <td>¥28,000</td>
           <td class="sold-table__col-sold">¥37,900</td>
@@ -368,6 +581,54 @@
         </tr></tbody>
       </table>
     </div>
+<div id="soldPsaModal_77f72b5e577e48c4ad00b35c2b53c7ec" class="psa-modal-overlay" onclick="closeGenericModalOnOverlay(event, 'soldPsaModal_77f72b5e577e48c4ad00b35c2b53c7ec')">
+  <div class="psa-modal psa-modal--wide">
+    <div class="psa-modal__header">
+      <h2>Mega Charizard Xex SAR — PSA Population</h2>
+      <button class="psa-modal__close" onclick="closeGenericModal('soldPsaModal_77f72b5e577e48c4ad00b35c2b53c7ec')" aria-label="Close">&times;</button>
+    </div>
+    <p class="psa-modal__summary">No population reading from the moment of sale is on file for this card — likely sold before this comparison feature was added. Showing the current population only: 51,612.</p>
+    <p class="psa-modal__summary">+1,993 total increase recorded since tracking began (accumulated)</p><div class="volume-chart"><div class="volume-chart__bars"><div class="volume-chart__bar-col" title="2026-08-17: 7 increases"><div class="volume-chart__bar" style="height:4.4%"></div></div><div class="volume-chart__bar-col" title="2026-08-18: 141 increases"><div class="volume-chart__bar" style="height:88.1%"></div></div><div class="volume-chart__bar-col" title="2026-08-19: 0 increases"><div class="volume-chart__bar" style="height:0.0%"></div></div><div class="volume-chart__bar-col" title="2026-08-20: 126 increases"><div class="volume-chart__bar" style="height:78.8%"></div></div><div class="volume-chart__bar-col" title="2026-08-21: 114 increases"><div class="volume-chart__bar" style="height:71.2%"></div></div><div class="volume-chart__bar-col" title="2026-08-22: 129 increases"><div class="volume-chart__bar" style="height:80.6%"></div></div><div class="volume-chart__bar-col" title="2026-08-23: 91 increases"><div class="volume-chart__bar" style="height:56.9%"></div></div><div class="volume-chart__bar-col" title="2026-08-24: 70 increases"><div class="volume-chart__bar" style="height:43.8%"></div></div><div class="volume-chart__bar-col" title="2026-08-25: 152 increases"><div class="volume-chart__bar" style="height:95.0%"></div></div><div class="volume-chart__bar-col" title="2026-08-26: 160 increases"><div class="volume-chart__bar" style="height:100.0%"></div></div><div class="volume-chart__bar-col" title="2026-08-27: 118 increases"><div class="volume-chart__bar" style="height:73.8%"></div></div><div class="volume-chart__bar-col" title="2026-08-28: 0 increases"><div class="volume-chart__bar" style="height:0.0%"></div></div><div class="volume-chart__bar-col" title="2026-08-29: 135 increases"><div class="volume-chart__bar" style="height:84.4%"></div></div><div class="volume-chart__bar-col" title="2026-08-30: 123 increases"><div class="volume-chart__bar" style="height:76.9%"></div></div><div class="volume-chart__bar-col" title="2026-08-31: 84 increases"><div class="volume-chart__bar" style="height:52.5%"></div></div><div class="volume-chart__bar-col" title="2026-09-01: 154 increases"><div class="volume-chart__bar" style="height:96.2%"></div></div><div class="volume-chart__bar-col" title="2026-09-02: 100 increases"><div class="volume-chart__bar" style="height:62.5%"></div></div><div class="volume-chart__bar-col" title="2026-09-03: 131 increases"><div class="volume-chart__bar" style="height:81.9%"></div></div><div class="volume-chart__bar-col" title="2026-09-04: 158 increases"><div class="volume-chart__bar" style="height:98.8%"></div></div></div><div class="volume-chart__labels"><div class="volume-chart__label-col">08-17</div><div class="volume-chart__label-col"></div><div class="volume-chart__label-col"></div><div class="volume-chart__label-col">08-20</div><div class="volume-chart__label-col"></div><div class="volume-chart__label-col"></div><div class="volume-chart__label-col">08-23</div><div class="volume-chart__label-col"></div><div class="volume-chart__label-col"></div><div class="volume-chart__label-col">08-26</div><div class="volume-chart__label-col"></div><div class="volume-chart__label-col"></div><div class="volume-chart__label-col">08-29</div><div class="volume-chart__label-col"></div><div class="volume-chart__label-col"></div><div class="volume-chart__label-col">09-01</div><div class="volume-chart__label-col"></div><div class="volume-chart__label-col"></div><div class="volume-chart__label-col">09-04</div></div></div><div class="volume-table-wrap">
+      <table class="volume-table">
+        <thead><tr><th>Date</th><th>Increase</th></tr></thead>
+        <tbody><tr><td>2026-09-04</td><td>158</td></tr><tr><td>2026-09-03</td><td>131</td></tr><tr><td>2026-09-02</td><td>100</td></tr><tr><td>2026-09-01</td><td>154</td></tr><tr><td>2026-08-31</td><td>84</td></tr><tr><td>2026-08-30</td><td>123</td></tr><tr><td>2026-08-29</td><td>135</td></tr><tr><td>2026-08-28</td><td>0</td></tr><tr><td>2026-08-27</td><td>118</td></tr><tr><td>2026-08-26</td><td>160</td></tr><tr><td>2026-08-25</td><td>152</td></tr><tr><td>2026-08-24</td><td>70</td></tr><tr><td>2026-08-23</td><td>91</td></tr><tr><td>2026-08-22</td><td>129</td></tr><tr><td>2026-08-21</td><td>114</td></tr><tr><td>2026-08-20</td><td>126</td></tr><tr><td>2026-08-19</td><td>0</td></tr><tr><td>2026-08-18</td><td>141</td></tr><tr><td>2026-08-17</td><td>7</td></tr></tbody>
+      </table>
+    </div>
+    
+  </div>
+</div>
+<div id="soldPsaModal_d8575c5bf3f44643ac24a93b050d93a4" class="psa-modal-overlay" onclick="closeGenericModalOnOverlay(event, 'soldPsaModal_d8575c5bf3f44643ac24a93b050d93a4')">
+  <div class="psa-modal psa-modal--wide">
+    <div class="psa-modal__header">
+      <h2>Detective Pikachu: PROMO — PSA Population</h2>
+      <button class="psa-modal__close" onclick="closeGenericModal('soldPsaModal_d8575c5bf3f44643ac24a93b050d93a4')" aria-label="Close">&times;</button>
+    </div>
+    <p class="psa-modal__summary">No population reading from the moment of sale is on file for this card — likely sold before this comparison feature was added. Showing the current population only: 48,929.</p>
+    <p class="psa-modal__summary">+270 total increase recorded since tracking began (accumulated)</p><div class="volume-chart"><div class="volume-chart__bars"><div class="volume-chart__bar-col" title="2026-08-18: 40 increases"><div class="volume-chart__bar" style="height:54.8%"></div></div><div class="volume-chart__bar-col" title="2026-08-19: 51 increases"><div class="volume-chart__bar" style="height:69.9%"></div></div><div class="volume-chart__bar-col" title="2026-08-20: 73 increases"><div class="volume-chart__bar" style="height:100.0%"></div></div><div class="volume-chart__bar-col" title="2026-08-21: 0 increases"><div class="volume-chart__bar" style="height:0.0%"></div></div><div class="volume-chart__bar-col" title="2026-08-22: 49 increases"><div class="volume-chart__bar" style="height:67.1%"></div></div><div class="volume-chart__bar-col" title="2026-08-23: 40 increases"><div class="volume-chart__bar" style="height:54.8%"></div></div><div class="volume-chart__bar-col" title="2026-08-24: 17 increases"><div class="volume-chart__bar" style="height:23.3%"></div></div></div><div class="volume-chart__labels"><div class="volume-chart__label-col">08-18</div><div class="volume-chart__label-col">08-19</div><div class="volume-chart__label-col">08-20</div><div class="volume-chart__label-col">08-21</div><div class="volume-chart__label-col">08-22</div><div class="volume-chart__label-col">08-23</div><div class="volume-chart__label-col">08-24</div></div></div><div class="volume-table-wrap">
+      <table class="volume-table">
+        <thead><tr><th>Date</th><th>Increase</th></tr></thead>
+        <tbody><tr><td>2026-08-24</td><td>17</td></tr><tr><td>2026-08-23</td><td>40</td></tr><tr><td>2026-08-22</td><td>49</td></tr><tr><td>2026-08-21</td><td>0</td></tr><tr><td>2026-08-20</td><td>73</td></tr><tr><td>2026-08-19</td><td>51</td></tr><tr><td>2026-08-18</td><td>40</td></tr></tbody>
+      </table>
+    </div>
+    
+  </div>
+</div>
+<div id="soldPsaModal_f882ad9d384346779c8d8d75754ab606" class="psa-modal-overlay" onclick="closeGenericModalOnOverlay(event, 'soldPsaModal_f882ad9d384346779c8d8d75754ab606')">
+  <div class="psa-modal psa-modal--wide">
+    <div class="psa-modal__header">
+      <h2>Umbreon VMAX CSR — PSA Population</h2>
+      <button class="psa-modal__close" onclick="closeGenericModal('soldPsaModal_f882ad9d384346779c8d8d75754ab606')" aria-label="Close">&times;</button>
+    </div>
+    <p class="psa-modal__summary">No population reading from the moment of sale is on file for this card — likely sold before this comparison feature was added. Showing the current population only: 8,567.</p>
+    <p class="psa-modal__summary">+44 total increase recorded since tracking began (accumulated)</p><div class="volume-chart"><div class="volume-chart__bars"><div class="volume-chart__bar-col" title="2026-08-19: 18 increases"><div class="volume-chart__bar" style="height:100.0%"></div></div><div class="volume-chart__bar-col" title="2026-08-20: 12 increases"><div class="volume-chart__bar" style="height:66.7%"></div></div><div class="volume-chart__bar-col" title="2026-08-21: 14 increases"><div class="volume-chart__bar" style="height:77.8%"></div></div></div><div class="volume-chart__labels"><div class="volume-chart__label-col">08-19</div><div class="volume-chart__label-col">08-20</div><div class="volume-chart__label-col">08-21</div></div></div><div class="volume-table-wrap">
+      <table class="volume-table">
+        <thead><tr><th>Date</th><th>Increase</th></tr></thead>
+        <tbody><tr><td>2026-08-21</td><td>14</td></tr><tr><td>2026-08-20</td><td>12</td></tr><tr><td>2026-08-19</td><td>18</td></tr></tbody>
+      </table>
+    </div>
+    
+  </div>
+</div>
 
 <footer>
   Prices shown after SNKRDUNK's 8.5% selling fee. Sell a card from your dashboard to add it here.
@@ -379,6 +640,23 @@ const CONFIG_EDITOR_URL = 'http://127.0.0.1:8971';
 // so config_editor.py knows which sold-portfolio file to modify. Set by
 // the page itself when it's generated.
 const PORTFOLIO_KEY = 'psa';
+
+// Generic modal helpers — same pattern as the main dashboard's per-card
+// modals, added here since the Sold Portfolio page never needed a modal
+// until the PSA population comparison feature.
+function openGenericModal(id) {
+  const overlay = document.getElementById(id);
+  if (overlay) overlay.classList.add('psa-modal-overlay--open');
+}
+
+function closeGenericModal(id) {
+  const overlay = document.getElementById(id);
+  if (overlay) overlay.classList.remove('psa-modal-overlay--open');
+}
+
+function closeGenericModalOnOverlay(event, id) {
+  if (event.target.id === id) closeGenericModal(id);
+}
 
 async function deleteSoldRecord(id, btnEl) {
   const row = btnEl.closest('tr');

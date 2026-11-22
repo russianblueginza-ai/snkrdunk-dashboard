@@ -66,6 +66,20 @@
     gap: 14px;
   }
 
+  .header__refresh-btn {
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: transparent;
+    color: var(--foil-teal);
+  }
+
+  .header__refresh-btn:hover { background: rgba(255, 255, 255, 0.08); }
+  .header__refresh-btn:disabled { opacity: 0.6; cursor: default; }
+
   .header__sold-link {
     font-size: 13px;
     font-weight: 600;
@@ -1472,8 +1486,27 @@
       
       <a class="header__nav-icon-link" href="dashboard.html"><img class="header__nav-icon" src="data/images/psa10-icon.png" alt="PSA10 Dashboard →" title="PSA10 Dashboard →"></a>
       <a class="header__nav-icon-link" href="raw_sold_portfolio.html" target="_blank" rel="noopener"><img class="header__nav-icon" src="data/images/sold-icon.png" alt="Sold Portfolio →" title="Sold Portfolio →"></a>
+      <button type="button" class="header__refresh-btn" id="refreshDashBtn" onclick="refreshDashboards()" title="Redraw both dashboards from the saved data (needs config_editor.py running)">🔄 Refresh</button>
+<script>
+async function refreshDashboards() {
+  const btn = document.getElementById('refreshDashBtn');
+  let editor = 'http://127.0.0.1:8971';
+  try { editor = CONFIG_EDITOR_URL; } catch (e) {}   // the page's own setting if it loaded, else the default
+  const label = btn.textContent;
+  btn.disabled = true; btn.textContent = '🔄 Refreshing…';
+  try {
+    const res = await fetch(editor + '/api/render', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ target: 'both' }) });
+    const data = await res.json();
+    if (data.ok) { btn.textContent = '✓ Done'; setTimeout(function () { location.reload(); }, 400); return; }
+    alert('Refresh failed: ' + (data.error || 'unknown error'));
+  } catch (err) {
+    alert('Could not reach the tracker — is config_editor.py running?');
+  }
+  btn.disabled = false; btn.textContent = label;
+}
+</script>
     </div>
-    <div class="updated">Last checked: <span class="updated__time">12:51 PM</span> on 2026-11-22</div>
+    <div class="updated">Last checked: <span class="updated__time">1:49 PM</span> on 2026-11-22</div>
   </div>
 </header>
 
@@ -1489,7 +1522,7 @@
           <span class="portfolio__value">¥25,450</span>
           <span class="portfolio__badge profit--up">▲ +¥0 (+0.0%)</span>
         </div>
-        <p class="portfolio__sub">Since Nov 21, 12:51 PM: ¥25,450 → ¥25,450</p>
+        <p class="portfolio__sub">Since Nov 21, 1:49 PM: ¥25,450 → ¥25,450</p>
         <div class="portfolio__chart"><div class="portfolio__chart-row">
         <div class="portfolio__chart-ylabels"><span>¥30,049</span><span>¥27,750</span><span>¥25,450</span></div>
         <div class="portfolio__chart-plot"><svg class="portfolio__chart-svg" viewBox="0 0 1052 190" preserveAspectRatio="none">
@@ -1505,8 +1538,8 @@
       </defs>
       <line x1="0" y1="163.0" x2="1052" y2="163.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="3 4" opacity="0.18" /><line x1="0" y1="95.0" x2="1052" y2="95.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="3 4" opacity="0.18" /><line x1="0" y1="27.0" x2="1052" y2="27.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="3 4" opacity="0.18" />
       <line x1="0" y1="163.0" x2="1052" y2="163.0" stroke="#6b6e7d" stroke-width="1" stroke-dasharray="5 5" opacity="0.6" />
-      <path d="M 0.0,163.0 L 0.0,163.0 L 9.3,163.0 L 18.6,163.0 L 27.9,163.0 L 37.2,163.0 L 46.5,163.0 L 55.9,163.0 L 65.2,163.0 L 74.5,163.0 L 83.8,163.0 L 93.1,163.0 L 102.4,163.0 L 111.7,163.0 L 121.0,163.0 L 130.3,163.0 L 139.6,163.0 L 149.0,163.0 L 158.3,163.0 L 167.6,163.0 L 176.9,163.0 L 186.2,163.0 L 195.5,163.0 L 204.8,163.0 L 214.1,163.0 L 223.4,163.0 L 232.7,163.0 L 242.1,163.0 L 251.4,163.0 L 260.7,163.0 L 270.0,163.0 L 279.3,163.0 L 288.6,163.0 L 297.9,163.0 L 307.2,163.0 L 316.5,163.0 L 325.8,163.0 L 335.2,163.0 L 344.5,163.0 L 353.8,163.0 L 363.1,163.0 L 372.4,160.0 L 381.7,160.0 L 391.0,160.0 L 400.3,160.0 L 409.6,160.0 L 418.9,160.0 L 428.2,152.6 L 437.6,152.6 L 446.9,152.6 L 456.2,152.6 L 465.5,152.6 L 474.8,160.0 L 484.1,160.0 L 493.4,160.0 L 502.7,27.0 L 512.0,27.0 L 521.3,27.0 L 530.7,27.0 L 540.0,27.0 L 549.3,163.0 L 558.6,163.0 L 567.9,163.0 L 577.2,163.0 L 586.5,163.0 L 595.8,163.0 L 605.1,163.0 L 614.4,163.0 L 623.8,163.0 L 633.1,163.0 L 642.4,163.0 L 651.7,163.0 L 661.0,163.0 L 670.3,163.0 L 679.6,163.0 L 688.9,163.0 L 698.2,163.0 L 707.5,163.0 L 716.8,163.0 L 726.2,163.0 L 735.5,163.0 L 744.8,163.0 L 754.1,163.0 L 763.4,163.0 L 772.7,163.0 L 782.0,163.0 L 791.3,163.0 L 800.6,163.0 L 809.9,163.0 L 819.3,163.0 L 828.6,163.0 L 837.9,163.0 L 847.2,163.0 L 856.5,163.0 L 865.8,163.0 L 875.1,163.0 L 884.4,163.0 L 893.7,163.0 L 903.0,163.0 L 912.4,163.0 L 921.7,163.0 L 931.0,163.0 L 940.3,163.0 L 949.6,163.0 L 958.9,163.0 L 968.2,163.0 L 977.5,163.0 L 986.8,163.0 L 996.1,163.0 L 1005.5,163.0 L 1014.8,163.0 L 1024.1,163.0 L 1033.4,163.0 L 1042.7,163.0 L 1052.0,163.0 L 1052.0,163.0 Z" fill="url(#portfolioFillUp_1D)" stroke="none" />
-      <polyline points="0.0,163.0 9.3,163.0 18.6,163.0 27.9,163.0 37.2,163.0 46.5,163.0 55.9,163.0 65.2,163.0 74.5,163.0 83.8,163.0 93.1,163.0 102.4,163.0 111.7,163.0 121.0,163.0 130.3,163.0 139.6,163.0 149.0,163.0 158.3,163.0 167.6,163.0 176.9,163.0 186.2,163.0 195.5,163.0 204.8,163.0 214.1,163.0 223.4,163.0 232.7,163.0 242.1,163.0 251.4,163.0 260.7,163.0 270.0,163.0 279.3,163.0 288.6,163.0 297.9,163.0 307.2,163.0 316.5,163.0 325.8,163.0 335.2,163.0 344.5,163.0 353.8,163.0 363.1,163.0 372.4,160.0 381.7,160.0 391.0,160.0 400.3,160.0 409.6,160.0 418.9,160.0 428.2,152.6 437.6,152.6 446.9,152.6 456.2,152.6 465.5,152.6 474.8,160.0 484.1,160.0 493.4,160.0 502.7,27.0 512.0,27.0 521.3,27.0 530.7,27.0 540.0,27.0 549.3,163.0 558.6,163.0 567.9,163.0 577.2,163.0 586.5,163.0 595.8,163.0 605.1,163.0 614.4,163.0 623.8,163.0 633.1,163.0 642.4,163.0 651.7,163.0 661.0,163.0 670.3,163.0 679.6,163.0 688.9,163.0 698.2,163.0 707.5,163.0 716.8,163.0 726.2,163.0 735.5,163.0 744.8,163.0 754.1,163.0 763.4,163.0 772.7,163.0 782.0,163.0 791.3,163.0 800.6,163.0 809.9,163.0 819.3,163.0 828.6,163.0 837.9,163.0 847.2,163.0 856.5,163.0 865.8,163.0 875.1,163.0 884.4,163.0 893.7,163.0 903.0,163.0 912.4,163.0 921.7,163.0 931.0,163.0 940.3,163.0 949.6,163.0 958.9,163.0 968.2,163.0 977.5,163.0 986.8,163.0 996.1,163.0 1005.5,163.0 1014.8,163.0 1024.1,163.0 1033.4,163.0 1042.7,163.0 1052.0,163.0" fill="none" stroke="#34d399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M 0.0,163.0 L 0.0,163.0 L 9.6,163.0 L 19.1,163.0 L 28.7,163.0 L 38.3,163.0 L 47.8,163.0 L 57.4,163.0 L 66.9,163.0 L 76.5,163.0 L 86.1,163.0 L 95.6,163.0 L 105.2,163.0 L 114.8,163.0 L 124.3,163.0 L 133.9,163.0 L 143.5,163.0 L 153.0,163.0 L 162.6,163.0 L 172.1,163.0 L 181.7,163.0 L 191.3,163.0 L 200.8,163.0 L 210.4,163.0 L 220.0,163.0 L 229.5,163.0 L 239.1,163.0 L 248.7,163.0 L 258.2,163.0 L 267.8,163.0 L 277.3,163.0 L 286.9,163.0 L 296.5,163.0 L 306.0,163.0 L 315.6,163.0 L 325.2,163.0 L 334.7,163.0 L 344.3,163.0 L 353.9,160.0 L 363.4,160.0 L 373.0,160.0 L 382.5,160.0 L 392.1,160.0 L 401.7,160.0 L 411.2,152.6 L 420.8,152.6 L 430.4,152.6 L 439.9,152.6 L 449.5,152.6 L 459.1,160.0 L 468.6,160.0 L 478.2,160.0 L 487.7,27.0 L 497.3,27.0 L 506.9,27.0 L 516.4,27.0 L 526.0,27.0 L 535.6,163.0 L 545.1,163.0 L 554.7,163.0 L 564.3,163.0 L 573.8,163.0 L 583.4,163.0 L 592.9,163.0 L 602.5,163.0 L 612.1,163.0 L 621.6,163.0 L 631.2,163.0 L 640.8,163.0 L 650.3,163.0 L 659.9,163.0 L 669.5,163.0 L 679.0,163.0 L 688.6,163.0 L 698.1,163.0 L 707.7,163.0 L 717.3,163.0 L 726.8,163.0 L 736.4,163.0 L 746.0,163.0 L 755.5,163.0 L 765.1,163.0 L 774.7,163.0 L 784.2,163.0 L 793.8,163.0 L 803.3,163.0 L 812.9,163.0 L 822.5,163.0 L 832.0,163.0 L 841.6,163.0 L 851.2,163.0 L 860.7,163.0 L 870.3,163.0 L 879.9,163.0 L 889.4,163.0 L 899.0,163.0 L 908.5,163.0 L 918.1,163.0 L 927.7,163.0 L 937.2,163.0 L 946.8,163.0 L 956.4,163.0 L 965.9,163.0 L 975.5,163.0 L 985.1,163.0 L 994.6,163.0 L 1004.2,163.0 L 1013.7,163.0 L 1023.3,163.0 L 1032.9,163.0 L 1042.4,163.0 L 1052.0,163.0 L 1052.0,163.0 Z" fill="url(#portfolioFillUp_1D)" stroke="none" />
+      <polyline points="0.0,163.0 9.6,163.0 19.1,163.0 28.7,163.0 38.3,163.0 47.8,163.0 57.4,163.0 66.9,163.0 76.5,163.0 86.1,163.0 95.6,163.0 105.2,163.0 114.8,163.0 124.3,163.0 133.9,163.0 143.5,163.0 153.0,163.0 162.6,163.0 172.1,163.0 181.7,163.0 191.3,163.0 200.8,163.0 210.4,163.0 220.0,163.0 229.5,163.0 239.1,163.0 248.7,163.0 258.2,163.0 267.8,163.0 277.3,163.0 286.9,163.0 296.5,163.0 306.0,163.0 315.6,163.0 325.2,163.0 334.7,163.0 344.3,163.0 353.9,160.0 363.4,160.0 373.0,160.0 382.5,160.0 392.1,160.0 401.7,160.0 411.2,152.6 420.8,152.6 430.4,152.6 439.9,152.6 449.5,152.6 459.1,160.0 468.6,160.0 478.2,160.0 487.7,27.0 497.3,27.0 506.9,27.0 516.4,27.0 526.0,27.0 535.6,163.0 545.1,163.0 554.7,163.0 564.3,163.0 573.8,163.0 583.4,163.0 592.9,163.0 602.5,163.0 612.1,163.0 621.6,163.0 631.2,163.0 640.8,163.0 650.3,163.0 659.9,163.0 669.5,163.0 679.0,163.0 688.6,163.0 698.1,163.0 707.7,163.0 717.3,163.0 726.8,163.0 736.4,163.0 746.0,163.0 755.5,163.0 765.1,163.0 774.7,163.0 784.2,163.0 793.8,163.0 803.3,163.0 812.9,163.0 822.5,163.0 832.0,163.0 841.6,163.0 851.2,163.0 860.7,163.0 870.3,163.0 879.9,163.0 889.4,163.0 899.0,163.0 908.5,163.0 918.1,163.0 927.7,163.0 937.2,163.0 946.8,163.0 956.4,163.0 965.9,163.0 975.5,163.0 985.1,163.0 994.6,163.0 1004.2,163.0 1013.7,163.0 1023.3,163.0 1032.9,163.0 1042.4,163.0 1052.0,163.0" fill="none" stroke="#34d399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
     </svg><span class="portfolio__chart-dot portfolio__chart-dot--up" style="left:100.00%; top:85.79%;"></span></div>
       </div>
       <div class="portfolio__chart-xlabels"><span>11/21</span><span>11/21</span><span>11/21</span><span>11/21</span><span>11/22</span></div></div>
@@ -1516,7 +1549,7 @@
           <span class="portfolio__value">¥25,450</span>
           <span class="portfolio__badge profit--down">▼ -¥5,149 (-16.8%)</span>
         </div>
-        <p class="portfolio__sub">Since Nov 15, 12:51 PM: ¥30,599 → ¥25,450</p>
+        <p class="portfolio__sub">Since Nov 15, 1:49 PM: ¥30,599 → ¥25,450</p>
         <div class="portfolio__chart"><div class="portfolio__chart-row">
         <div class="portfolio__chart-ylabels"><span>¥31,899</span><span>¥28,674</span><span>¥25,450</span></div>
         <div class="portfolio__chart-plot"><svg class="portfolio__chart-svg" viewBox="0 0 1052 190" preserveAspectRatio="none">
@@ -1543,7 +1576,7 @@
           <span class="portfolio__value">¥25,450</span>
           <span class="portfolio__badge profit--down">▼ -¥7,450 (-22.6%)</span>
         </div>
-        <p class="portfolio__sub">Since Oct 23, 12:51 PM: ¥32,900 → ¥25,450</p>
+        <p class="portfolio__sub">Since Oct 23, 1:49 PM: ¥32,900 → ¥25,450</p>
         <div class="portfolio__chart"><div class="portfolio__chart-row">
         <div class="portfolio__chart-ylabels"><span>¥34,300</span><span>¥29,875</span><span>¥25,450</span></div>
         <div class="portfolio__chart-plot"><svg class="portfolio__chart-svg" viewBox="0 0 1052 190" preserveAspectRatio="none">

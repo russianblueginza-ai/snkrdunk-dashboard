@@ -1506,9 +1506,9 @@
   <div class="header__right">
     <div class="header__nav-row">
       
-      <a class="header__nav-icon-link" href="dashboard.html"><img class="header__nav-icon" src="data/images/psa10-icon.png" alt="PSA10 Dashboard →" title="PSA10 Dashboard →"></a><span class="local-only-nav" style="display:contents"><a class="header__sold-link" href="dashboard_watch.html">Watchlist →</a></span>
+      <a class="header__nav-icon-link" href="dashboard.html"><img class="header__nav-icon" src="data/images/psa10-icon.png" alt="PSA10 Dashboard →" title="PSA10 Dashboard →"></a><a class="header__nav-icon-link" href="dashboard_watch.html"><img class="header__nav-icon" src="data/images/watchlist-icon.png" alt="Watchlist →" title="Watchlist →"></a>
       <a class="header__nav-icon-link" href="raw_sold_portfolio.html" target="_blank" rel="noopener"><img class="header__nav-icon" src="data/images/sold-icon.png" alt="Sold Portfolio →" title="Sold Portfolio →"></a>
-      <button type="button" class="header__refresh-btn" id="scrapeNowBtn" onclick="scrapeNow()" title="Scrape SNKRDUNK now for every raw card (needs config_editor.py running)">⬇ Scrape now</button>
+      <button type="button" class="header__nav-icon-link header__refresh-icon-btn" id="scrapeNowBtn" onclick="scrapeNow()" title="Scrape SNKRDUNK now for every raw card (needs config_editor.py running)"><img class="header__nav-icon" src="data/images/scrape-icon.png" alt="Scrape now"></button>
 <div id="scrapeBox" style="display:none;position:fixed;left:16px;bottom:16px;z-index:9999;width:min(420px,calc(100vw - 32px));
   background:#1c1e28;border:1px solid #2b2e3b;border-radius:12px;padding:12px 14px;box-shadow:0 8px 30px rgba(0,0,0,.45);font-size:13px;color:#f2efe8">
   <div style="display:flex;justify-content:space-between;gap:8px;align-items:center">
@@ -1619,7 +1619,7 @@ async function refreshDashboards() {
 }
 </script>
     </div>
-    <div class="updated">Last checked: <span class="updated__time">11:52 AM</span> on 2026-11-23</div>
+    <div class="updated">Last checked: <span class="updated__time">12:29 PM</span> on 2026-11-23</div>
   </div>
 </header>
 
@@ -1635,7 +1635,7 @@ async function refreshDashboards() {
           <span class="portfolio__value">¥101,591</span>
           <span class="portfolio__badge profit--up">▲ +¥67,141 (+194.9%)</span>
         </div>
-        <p class="portfolio__sub">Since Nov 22, 11:52 AM: ¥34,450 → ¥101,591</p>
+        <p class="portfolio__sub">Since Nov 22, 12:29 PM: ¥34,450 → ¥101,591</p>
         <div class="portfolio__chart"><div class="portfolio__chart-row">
         <div class="portfolio__chart-ylabels"><span>¥103,092</span><span>¥68,721</span><span>¥34,350</span></div>
         <div class="portfolio__chart-plot"><svg class="portfolio__chart-svg" viewBox="0 0 1052 190" preserveAspectRatio="none">
@@ -1662,7 +1662,7 @@ async function refreshDashboards() {
           <span class="portfolio__value">¥101,591</span>
           <span class="portfolio__badge profit--up">▲ +¥63,511 (+166.8%)</span>
         </div>
-        <p class="portfolio__sub">Since Nov 16, 11:52 AM: ¥38,080 → ¥101,591</p>
+        <p class="portfolio__sub">Since Nov 16, 12:29 PM: ¥38,080 → ¥101,591</p>
         <div class="portfolio__chart"><div class="portfolio__chart-row">
         <div class="portfolio__chart-ylabels"><span>¥103,092</span><span>¥68,721</span><span>¥34,350</span></div>
         <div class="portfolio__chart-plot"><svg class="portfolio__chart-svg" viewBox="0 0 1052 190" preserveAspectRatio="none">
@@ -1689,7 +1689,7 @@ async function refreshDashboards() {
           <span class="portfolio__value">¥101,591</span>
           <span class="portfolio__badge profit--up">▲ +¥62,001 (+156.6%)</span>
         </div>
-        <p class="portfolio__sub">Since Oct 24, 11:52 AM: ¥39,590 → ¥101,591</p>
+        <p class="portfolio__sub">Since Oct 24, 12:29 PM: ¥39,590 → ¥101,591</p>
         <div class="portfolio__chart"><div class="portfolio__chart-row">
         <div class="portfolio__chart-ylabels"><span>¥103,092</span><span>¥68,721</span><span>¥34,350</span></div>
         <div class="portfolio__chart-plot"><svg class="portfolio__chart-svg" viewBox="0 0 1052 190" preserveAspectRatio="none">
@@ -1716,7 +1716,7 @@ async function refreshDashboards() {
           <span class="portfolio__value">¥101,591</span>
           <span class="portfolio__badge profit--up">▲ +¥59,306 (+140.3%)</span>
         </div>
-        <p class="portfolio__sub">Since Aug 25, 11:52 AM: ¥42,285 → ¥101,591</p>
+        <p class="portfolio__sub">Since Aug 25, 12:29 PM: ¥42,285 → ¥101,591</p>
         <div class="portfolio__chart"><div class="portfolio__chart-row">
         <div class="portfolio__chart-ylabels"><span>¥103,092</span><span>¥68,721</span><span>¥34,350</span></div>
         <div class="portfolio__chart-plot"><svg class="portfolio__chart-svg" viewBox="0 0 1052 190" preserveAspectRatio="none">
@@ -1795,6 +1795,62 @@ async function refreshDashboards() {
     </section>
 
 
+<div id="watchFeed" style="display:none;max-width:1100px;margin:0 auto 18px;border:1px solid rgba(79,209,197,.35);border-radius:12px;
+  background:rgba(79,209,197,.06);padding:12px 16px;font-size:13px"></div>
+<script src="data/watch_feed.js"></script>
+<script>
+(function () {
+  var feed = window.WATCH_FEED;
+  var box = document.getElementById('watchFeed');
+  if (!feed || !box) return;
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function ago(iso) {
+    var h = (Date.now() - new Date(iso).getTime()) / 3600000;
+    return h < 1 ? Math.max(1, Math.round(h * 60)) + ' min ago' : h < 24 ? Math.round(h) + 'h ago' : Math.round(h / 24) + 'd ago';
+  }
+  var seen = '';
+  try { seen = localStorage.getItem('watchFeedSeen') || ''; } catch (e) {}
+  var fresh = feed.alerts.filter(function (a) { return a.timestamp > seen; });
+  var older = feed.alerts.filter(function (a) { return a.timestamp <= seen; });
+  if (!feed.alerts.length && !feed.opportunities.length) return;
+  var ICON = { drop_24h: '📉', drop_7d: '📉', rise_24h: '📈', rise_7d: '📈', spike_24h: '🚨', trend_30d: '📊',
+               dip_strong_volume: '💰', target: '🎯', volume: '🔥', buy_score: '⭐' };
+  var WHAT = { drop_24h: 'price drop (24h)', drop_7d: 'price drop (7d)', rise_24h: 'price up (24h)', rise_7d: 'price up (7d)',
+               spike_24h: 'sudden spike (24h)', trend_30d: 'big 30-day trend change', dip_strong_volume: 'dip while sales stay strong',
+               target: 'target price reached', volume: 'unusually high sales', buy_score: 'Buy Score threshold reached' };
+  function row(a, isNew) {
+    var colour = /drop|dip|target|buy/.test(a.type) ? '#34d399' : /rise|spike/.test(a.type) ? '#fb7185' : '#f2efe8';
+    return '<li style="margin:4px 0;' + (isNew ? '' : 'opacity:.55;') + '">' + (ICON[a.type] || '🔔') + ' <a href="dashboard_watch.html#' + esc(a.anchor) +
+      '" style="color:' + colour + ';font-weight:600;text-decoration:none">' + esc(a.card) + '</a> — ' + esc((a.types || [a.type]).map(function (t) { return WHAT[t] || t; }).join(', ')) +
+      ' <span style="color:#8b8d9a">· ' + esc(a.lines.slice(0, 2).join(' · ')) + ' · ' + ago(a.timestamp) + '</span></li>';
+  }
+  var html = '<div style="display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap">' +
+    '<b>🔔 Watchlist' + (fresh.length ? ' — ' + fresh.length + ' new alert' + (fresh.length > 1 ? 's' : '') : ' alerts') + '</b>' +
+    '<span><a href="dashboard_watch.html" style="color:#4fd1c5;margin-right:12px">Open watchlist →</a>' +
+    (fresh.length ? '<button type="button" id="watchFeedSeen" style="cursor:pointer;background:transparent;border:1px solid rgba(255,255,255,.25);color:#f2efe8;border-radius:999px;padding:3px 10px;font-size:12px">Mark as seen</button>' : '') +
+    '</span></div>';
+  if (feed.alerts.length) {
+    html += '<ul style="list-style:none;margin:8px 0 0;padding:0">' + fresh.slice(0, 8).map(function (a) { return row(a, true); }).join('') +
+      (fresh.length > 8 ? '<li style="color:#8b8d9a">+' + (fresh.length - 8) + ' more on the watchlist</li>' : '') +
+      (fresh.length ? '' : older.slice(0, 3).map(function (a) { return row(a, false); }).join('')) + '</ul>';
+  }
+  if (feed.opportunities.length) {
+    html += '<div style="margin-top:8px">⭐ Buying opportunities now: ' + feed.opportunities.slice(0, 6).map(function (o) {
+      return '<a href="dashboard_watch.html#' + esc(o.anchor) + '" style="color:#34d399;text-decoration:none;font-weight:600">' + esc(o.card) +
+        '</a> <span style="color:#8b8d9a">(Buy ' + o.buy + ', ' + (o.price ? '¥' + Number(o.price).toLocaleString() : '') + ')</span>';
+    }).join(' · ') + '</div>';
+  }
+  html += '<div style="color:#8b8d9a;font-size:11px;margin-top:6px">Alerts from the last ' + Math.round(feed.hours / 24) + ' days · watchlist checked ' + ago(feed.generated_at) + '</div>';
+  box.innerHTML = html;
+  box.style.display = 'block';
+  if (fresh.length) box.style.borderColor = 'rgba(251,191,36,.6)';
+  var btn = document.getElementById('watchFeedSeen');
+  if (btn) btn.onclick = function () {
+    try { localStorage.setItem('watchFeedSeen', feed.alerts[0].timestamp); } catch (e) {}
+    location.reload();
+  };
+})();
+</script>
 
 <div class="sortbar">
   <span class="sortbar__label">Sort by</span>

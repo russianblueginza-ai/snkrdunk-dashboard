@@ -166,6 +166,53 @@
   .purchased { margin-top: 20px; font-size: 13px; }
   .empty { padding: 40px; text-align: center; border: 1px dashed var(--surface-border); border-radius: 14px; color: var(--text-muted); }
   .w.is-hidden { display: none; }
+
+  /* ---------- pop-ups ---------- */
+  .chip--info { border-color: var(--foil-teal); color: var(--foil-teal); }
+  .modal { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(5,6,10,.72); padding: 30px 16px; overflow: auto; }
+  .modal.open { display: block; }
+  .modal__box { position: relative; max-width: 820px; margin: 0 auto; background: var(--surface); border: 1px solid var(--surface-border);
+    border-radius: 14px; padding: 22px 24px 26px; }
+  .modal__box--wide { max-width: 1150px; }
+  .modal__box h2 { font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: .03em; margin: 0 0 12px; font-size: 20px; }
+  .modal__x { position: absolute; top: 10px; right: 14px; background: none; border: 0; color: var(--text-muted); font-size: 26px; cursor: pointer; }
+  .info { font-size: 13px; line-height: 1.6; }
+  .info h3 { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--foil-teal); margin: 20px 0 6px; }
+  .info h3:first-child { margin-top: 0; }
+  .info p { margin: 0 0 8px; }
+  .info ul { margin: 0 0 8px; padding-left: 18px; }
+  .info-t td:nth-child(2) { text-align: right; white-space: nowrap; color: var(--text-muted); width: 40px; }
+  .info-t td:first-child { white-space: nowrap; font-weight: 600; width: 150px; }
+  .lb-hot { color: #fda4af; } .lb-weak { color: #fdba74; } .lb-thin { color: #cbd5e1; } .lb-hold { color: #c7d2fe; }
+  .lb-buy3, .lb-buy2 { color: #86efac; } .lb-buy1 { color: #d9f99d; }
+
+  /* ---------- compare ---------- */
+  .w__cmp { font-size: 11px; color: var(--text-muted); display: inline-flex; align-items: center; gap: 4px; cursor: pointer;
+    border: 1px dashed var(--surface-border); border-radius: 999px; padding: 2px 8px; }
+  .w__cmp:has(input:checked) { color: var(--foil-teal); border-color: var(--foil-teal); border-style: solid; }
+  .cmpbar { position: fixed; left: 50%; transform: translateX(-50%); bottom: 18px; z-index: 900; display: none; gap: 10px; align-items: center;
+    background: var(--surface-2); border: 1px solid var(--foil-teal); border-radius: 999px; padding: 8px 10px 8px 16px; font-size: 13px;
+    box-shadow: 0 8px 30px rgba(0,0,0,.5); }
+  .cmpbar.show { display: flex; }
+  .cmpbar__go { cursor: pointer; border: 0; border-radius: 999px; padding: 6px 14px; font-weight: 700; background: var(--foil-teal); color: #0b1a19; }
+  .cmpbar__go:disabled { opacity: .4; cursor: default; }
+  .cmpbar__clear { cursor: pointer; border: 0; background: none; color: var(--text-muted); }
+  .cmp-diffs { background: var(--surface-2); border-radius: 10px; padding: 12px 16px; margin-bottom: 16px; font-size: 13px; }
+  .cmp-diffs h4 { margin: 0 0 6px; }
+  .cmp-diffs ul { margin: 0; padding-left: 18px; line-height: 1.6; }
+  .cmp-wrap { overflow-x: auto; }
+  .cmp-t { min-width: 560px; }
+  .cmp-t th { text-align: left; vertical-align: bottom; padding: 6px; font-size: 13px; }
+  .cmp-t th img { width: 90px; height: 126px; object-fit: contain; display: block; margin-bottom: 6px; background: var(--surface-2); border-radius: 6px; }
+  .cmp-t th a { color: var(--text); text-decoration: none; }
+  .cmp-t th .muted { font-weight: 400; font-size: 11px; display: block; }
+  .cmp-t td:first-child { color: var(--text-muted); width: 210px; }
+  .cmp-t tr.grp td { color: var(--foil-teal); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; padding-top: 14px; border-bottom: 0; }
+  .cmp-t td.best { color: var(--up); font-weight: 700; }
+  .cmp-t td.worst { color: var(--down); }
+  .cmp-t td.na { color: var(--flat); }
+  .cmp-t td.pos { color: var(--up); } .cmp-t td.neg { color: var(--down); }
+  .cmp-note { font-size: 11px; color: var(--text-muted); margin-top: 10px; }
 </style>
 <!-- Your personal tweaks live in custom.css (shared with the other dashboards). -->
 <link rel="stylesheet" href="custom.css">
@@ -299,23 +346,18 @@ async function refreshDashboards() {
 }
 </script>
     </div>
-    <div class="updated">Last checked: <span class="updated__time">1:52 PM</span> on 2026-11-23</div>
+    <div class="updated">Last checked: <span class="updated__time">2:45 PM</span> on 2026-11-23</div>
     <a class="edit-link local-only" href="http://127.0.0.1:8971/watch" target="_blank" rel="noopener">✎ Add / edit watchlist cards</a>
     <a class="edit-link local-only" href="http://127.0.0.1:8971/watch#popularity" target="_blank" rel="noopener">✎ Edit character popularity list</a>
   </div>
 </header>
 
 <main>
-  <p class="intro">
-    <b class="inv">Investment Score</b> = how good the card is long term, whatever today's price.
-    <b class="buy">Buy Score</b> = how good today's price is as an entry point. A card can score high on one and low on the other.
-    "% data" is how much of each score is backed by real data or your own ratings; anything missing counts as 0, never as a guess.
-    These are indicators to support your decisions, not investment advice.
-  </p>
 
   
 
   <div class="toolbar">
+    <button type="button" class="chip chip--info" onclick="openModal('infoModal')">ⓘ How it works</button>
     <button type="button" class="chip chip--on" data-filter="all" onclick="setFilter(this)">All <b>2</b></button><button type="button" class="chip" data-filter="buy" onclick="setFilter(this)">Buying opportunities <b>0</b></button><button type="button" class="chip" data-filter="drop" onclick="setFilter(this)">Getting cheaper (7d) <b>1</b></button><button type="button" class="chip" data-filter="overpriced" onclick="setFilter(this)">Great card, overpriced now <b>1</b></button><button type="button" class="chip" data-filter="art" onclick="setFilter(this)">Needs your artwork review <b>0</b></button><button type="button" class="chip" data-filter="hot" onclick="setFilter(this)">Overheated <b>0</b></button><button type="button" class="chip" data-filter="thin" onclick="setFilter(this)">Low liquidity <b>0</b></button>
     <label class="sort">Sort
       <select id="sortSel" onchange="applySort()">
@@ -343,7 +385,8 @@ async function refreshDashboards() {
         <div>
           <h3 class="w__name"><a href="https://snkrdunk.com/apparels/128121/sales-histories" target="_blank" rel="noopener">Mew ex SAR</a></h3>
           <div class="w__sub">151 · #205/165 · PSA 10</div>
-          <div class="w__badges"><span class="badge badge--prio-medium">medium priority</span>
+          <div class="w__badges"><label class="w__cmp" title="Compare this card side by side with 1–2 others"><input type="checkbox" class="cmp-box" value="w-Mew_ex_SAR" onchange="toggleCompare(this)"> Compare</label>
+            <span class="badge badge--prio-medium">medium priority</span>
             <span class="badge badge--label badge--hold">Long-term hold candidate</span></div>
         </div>
         <div class="w__scores"><div class="score score--inv" title="Investment Score: long-term attractiveness, whatever today's price"><div class="score__ring" style="--p:74"><b>74</b></div><div class="score__label">Investment</div><div class="score__cov">93% data</div></div><div class="score score--buy" title="Buy Score: how good today's price is as an entry point"><div class="score__ring" style="--p:63"><b>63</b></div><div class="score__label">Buy</div><div class="score__cov">99% data</div></div></div>
@@ -366,7 +409,7 @@ async function refreshDashboards() {
   <div class="w__details" hidden>
     <div class="d__grid">
       <section><h4>Price history (1 year)</h4><svg class="pchart" viewBox="0 0 560 120" preserveAspectRatio="none"><polyline points="0.0,105.6 1.5,105.3 3.1,105.2 4.6,105.6 6.1,105.2 7.7,105.4 9.2,104.7 10.8,105.3 12.3,104.2 13.8,105.5 16.9,105.6 18.4,105.4 23.0,105.5 24.6,105.5 26.1,105.5 27.6,105.4 29.2,106.0 30.7,105.9 32.3,105.9 33.8,105.8 35.3,105.2 36.9,105.2 38.4,105.7 39.9,105.2 41.5,105.2 43.0,105.6 46.1,105.0 47.6,105.2 49.2,104.5 50.7,103.3 52.2,103.0 53.8,102.7 56.8,103.2 58.4,100.3 59.9,102.3 61.4,99.1 64.5,98.7 66.0,97.7 67.6,96.7 69.1,96.1 70.7,95.3 72.2,96.1 73.7,96.9 75.3,97.1 76.8,96.9 78.3,95.1 79.9,94.1 81.4,92.5 82.9,93.0 84.5,92.2 86.0,92.7 87.6,93.2 89.1,92.6 90.6,92.3 92.2,91.1 93.7,93.0 95.2,92.7 96.8,92.7 98.3,91.6 99.8,92.1 101.4,91.3 102.9,91.1 104.4,90.4 106.0,91.7 107.5,93.2 109.1,94.1 110.6,92.9 112.1,78.2 113.7,92.9 115.2,93.2 116.7,92.3 118.3,93.0 119.8,92.2 121.3,92.1 122.9,92.3 124.4,92.1 126.0,94.5 127.5,95.0 129.0,95.3 130.6,94.3 133.6,94.0 135.2,93.8 136.7,93.7 138.2,93.6 139.8,93.3 141.3,93.6 142.8,93.5 144.4,93.2 145.9,93.2 147.5,91.5 149.0,88.6 150.5,87.8 152.1,87.5 153.6,86.4 155.1,82.0 156.7,80.2 158.2,77.4 159.7,64.2 161.3,73.3 162.8,73.0 164.4,72.5 165.9,70.4 167.4,72.0 169.0,71.2 170.5,72.0 172.0,71.7 173.6,73.3 175.1,73.0 176.6,72.2 178.2,72.2 179.7,72.0 181.3,70.4 182.8,69.7 184.3,69.3 185.9,66.7 187.4,64.5 188.9,63.9 190.5,64.0 192.0,63.7 193.5,63.7 195.1,62.5 196.6,55.9 198.1,42.4 201.2,40.1 202.8,40.4 204.3,37.7 205.8,29.6 207.4,25.6 208.9,24.8 210.4,27.7 212.0,31.5 213.5,27.4 215.0,27.7 216.6,28.9 218.1,31.1 219.7,36.9 221.2,35.5 222.7,36.8 224.3,37.2 225.8,34.9 227.3,43.0 228.9,42.9 230.4,42.0 231.9,38.5 235.0,34.9 236.5,35.1 238.1,38.3 239.6,44.0 241.2,40.9 242.7,45.5 244.2,43.8 247.3,45.3 248.8,45.0 250.4,39.7 253.4,43.6 255.0,43.9 256.5,43.1 258.1,42.8 261.1,42.8 262.7,44.1 264.2,47.2 265.7,44.6 267.3,42.2 268.8,44.7 270.3,44.4 273.4,48.3 274.9,48.0 279.6,54.9 281.1,54.1 282.6,52.0 284.2,50.5 285.7,51.1 287.2,53.0 288.8,53.0 290.3,48.0 291.8,40.6 293.4,45.5 294.9,27.0 296.5,46.5 299.5,48.7 301.1,49.4 302.6,49.6 305.7,52.6 307.2,54.6 308.7,56.7 310.3,57.1 311.8,57.4 313.3,59.6 314.9,60.0 316.4,14.0 318.0,64.8 319.5,64.0 321.0,70.4 322.6,65.9 324.1,70.9 325.6,72.2 327.2,74.3 328.7,73.6 330.2,74.5 331.8,75.3 333.3,71.1 334.9,67.3 336.4,63.7 337.9,67.0 341.0,67.2 342.5,67.2 344.1,67.0 345.6,66.3 347.1,66.2 348.7,65.7 350.2,64.6 351.7,63.8 353.3,62.0 354.8,59.7 356.4,59.2 359.4,60.1 361.0,60.7 362.5,61.2 364.0,61.2 365.6,60.2 367.1,60.0 368.6,60.4 370.2,63.2 371.7,63.0 373.3,62.7 374.8,63.7 376.3,44.7 377.9,63.8 379.4,62.6 382.5,62.1 384.0,66.2 385.5,62.3 387.1,62.7 388.6,65.0 390.1,66.0 391.7,65.4 393.2,65.6 394.8,66.1 396.3,72.4 397.8,68.3 399.4,69.4 400.9,66.3 402.4,65.2 404.0,65.4 405.5,65.3 407.0,65.7 408.6,64.8 411.7,65.2 413.2,65.6 414.7,63.8 416.3,64.4 419.3,64.2 420.9,64.4 422.4,63.8 423.9,63.9 425.5,62.9 427.0,62.7 428.5,74.1 430.1,63.2 431.6,63.1 433.2,62.6 434.7,62.9 436.2,63.9 437.8,68.7 440.8,74.3 442.4,75.3 443.9,75.5 445.4,82.7 447.0,85.6 448.5,85.4 450.1,86.6 451.6,89.4 453.1,91.2 454.7,90.3 456.2,86.2 457.7,88.5 459.3,87.9 460.8,90.3 462.3,88.7 463.9,89.9 467.0,89.9 468.5,91.1 470.0,91.3 471.6,91.8 473.1,92.3 474.6,92.6 476.2,91.8 477.7,91.9 479.2,91.5 480.8,92.9 482.3,92.8 483.8,92.4 485.4,90.4 486.9,82.3 488.5,77.2 490.0,77.2 491.5,78.7 493.1,79.8 494.6,78.8 496.1,78.4 499.2,79.5 500.7,79.3 502.3,79.8 503.8,81.8 505.4,80.1 506.9,80.7 508.4,83.2 510.0,81.7 511.5,80.3 514.6,84.5 516.1,83.0 517.6,82.2 519.2,82.3 520.7,82.8 522.2,82.7 523.8,82.4 525.3,82.6 526.9,81.6 528.4,81.3 529.9,84.5 531.5,83.0 533.0,83.6 536.1,84.5 537.6,85.2 539.1,86.9 540.7,87.0 542.2,87.0 543.8,87.9 545.3,88.7 546.8,87.7 548.4,86.6 551.4,86.5 553.0,86.6 554.5,86.5 559.8,86.5 559.8,86.5 559.8,86.5 559.9,86.5 559.9,86.5 559.9,86.5 559.9,86.5 560.0,86.5" fill="none" stroke="url(#foilGrad)" stroke-width="2" vector-effect="non-scaling-stroke"/></svg><div class="pchart__axis"><span>Nov 24</span><span>low ¥39,000 · high ¥150,000</span><span>Nov 23</span></div>
-        <h4>Market data</h4><table class="mt"><tbody><tr><td>Current price</td><td>¥62,500 <span class='muted'>(Last sold 3 days ago)</span></td></tr><tr><td>Previous price (24h ago)</td><td>n/a</td></tr><tr><td>Average sale price</td><td>¥61,277 <span class='muted'>(last 30 days)</span></td></tr><tr><td>Recent high / low</td><td>¥62,900 / ¥59,700</td></tr><tr><td>90-day average / high / low</td><td>¥65,948 / ¥91,366 / ¥54,859</td></tr><tr><td>1-year high / low</td><td>¥150,000 / ¥39,000 <span class='muted'>(now 21% up the range)</span></td></tr><tr><td>All-time high / low</td><td>¥150,000 <span class='muted'>(2026-06-17)</span> / ¥5,900 <span class='muted'>(2024-04-27)</span><br><span class='muted'>-58% vs the all-time high · history since 2023-07-31 · shown for context, not scored</span></td></tr><tr><td>Long-term trend</td><td>+56.8% over 1 year</td></tr><tr><td>Price volatility (30 days)</td><td>1.9% typical swing</td></tr><tr><td>Sales</td><td>7 in 7 days · ≥22 in 30 days</td></tr><tr><td>Sales this week vs normal</td><td>n/a (needs 3+ weeks of sales)</td></tr><tr><td>PSA 10 / PSA 9 / all grades</td><td>23,702 / 4,295 / 29,243</td></tr><tr><td>PSA 10 growth</td><td>n/a (needs 2+ weeks of PSA updates)</td></tr><tr><td>Release date</td><td>6/16/2023</td></tr><tr><td>Added to watchlist</td><td>2026-11-23</td></tr><tr><td>Last price check</td><td>Nov 23, 1:52 PM</td></tr></tbody></table></section>
+        <h4>Market data</h4><table class="mt"><tbody><tr><td>Current price</td><td>¥62,500 <span class='muted'>(Last sold 3 days ago)</span></td></tr><tr><td>Previous price (24h ago)</td><td>n/a</td></tr><tr><td>Average sale price</td><td>¥61,277 <span class='muted'>(last 30 days)</span></td></tr><tr><td>Recent high / low</td><td>¥62,900 / ¥59,700</td></tr><tr><td>90-day average / high / low</td><td>¥65,948 / ¥91,366 / ¥54,859</td></tr><tr><td>1-year high / low</td><td>¥150,000 / ¥39,000 <span class='muted'>(now 21% up the range)</span></td></tr><tr><td>All-time high / low</td><td>¥150,000 <span class='muted'>(2026-06-17)</span> / ¥5,900 <span class='muted'>(2024-04-27)</span><br><span class='muted'>-58% vs the all-time high · history since 2023-07-31 · shown for context, not scored</span></td></tr><tr><td>Long-term trend</td><td>+56.8% over 1 year</td></tr><tr><td>Price volatility (30 days)</td><td>1.9% typical swing</td></tr><tr><td>Sales</td><td>7 in 7 days · ≥22 in 30 days</td></tr><tr><td>Sales this week vs normal</td><td>n/a (needs 3+ weeks of sales)</td></tr><tr><td>PSA 10 / PSA 9 / all grades</td><td>23,702 / 4,295 / 29,243</td></tr><tr><td>PSA 10 growth</td><td>n/a (needs 2+ weeks of PSA updates)</td></tr><tr><td>Release date</td><td>n/a</td></tr><tr><td>Added to watchlist</td><td>2026-11-23</td></tr><tr><td>Last price check</td><td>Nov 23, 1:52 PM</td></tr></tbody></table></section>
       <section><h4>Investment Score: 74/100</h4><p class="muted">93 of the 100 points could be judged from data or your input; the rest count as 0 until there is data.</p><table class="bd"><tbody><tr class=""><td>Character popularity <span class="src">(your list)</span></td><td class="num">15 / 15</td><td>Mew is tier S on your popularity list</td></tr><tr class=""><td>Card rarity <span class="src">(your input)</span></td><td class="num">11 / 15</td><td>SAR 9 pts, low reprint risk +2</td></tr><tr class=""><td>PSA population</td><td class="num">1 / 15</td><td>PSA 10 pop 23,702; growth not known yet (needs 2+ weeks of PSA updates)</td></tr><tr class=""><td>Sales volume &amp; liquidity</td><td class="num">17 / 20</td><td>11.7 sales/week over the last 9 days seen</td></tr><tr class=""><td>Price fundamentals</td><td class="num">15 / 15</td><td>1 year trend +57%; price swings 2%</td></tr><tr class=""><td>Overseas demand <span class="src">(your rating)</span></td><td class="num">5 / 10</td><td>your rating 5/10</td></tr><tr class=""><td>Artwork <span class="src">(your rating)</span></td><td class="num">10 / 10</td><td>your artwork-quality rating 10/10</td></tr></tbody></table><h4>Buy Score: 63/100 — Fair price, consider waiting</h4><p class="muted">99 of the 100 points could be judged from data or your input; the rest count as 0 until there is data.</p><table class="bd"><tbody><tr class=""><td>Price vs target <span class="src">(your input)</span></td><td class="num">7 / 25</td><td>+14% vs your target ¥55,000</td></tr><tr class=""><td>Price vs history</td><td class="num">13 / 20</td><td>-5% vs the 90-day average ¥65,948</td></tr><tr class=""><td>Recent trend</td><td class="num">9 / 15</td><td>+0% in 7 days — steady</td></tr><tr class=""><td>Sales volume &amp; liquidity</td><td class="num">12.8 / 15</td><td>11.7 sales/week over the last 9 days seen</td></tr><tr class=""><td>Investment Score</td><td class="num">11.1 / 15</td><td>Investment Score 74 (coverage 93%)</td></tr><tr class=""><td>Margin of safety &amp; risk</td><td class="num">10 / 10</td><td>in the lower third of its 1-year range</td></tr></tbody></table></section>
     </div>
     <div class="d__grid">
@@ -385,7 +428,8 @@ async function refreshDashboards() {
         <div>
           <h3 class="w__name"><a href="https://snkrdunk.com/apparels/107574/sales-histories" target="_blank" rel="noopener">Armored Mewtwo</a></h3>
           <div class="w__sub">Promo · #SM-P 365 · PSA 10</div>
-          <div class="w__badges"><span class="badge badge--prio-medium">medium priority</span>
+          <div class="w__badges"><label class="w__cmp" title="Compare this card side by side with 1–2 others"><input type="checkbox" class="cmp-box" value="w-Armored_Mewtwo" onchange="toggleCompare(this)"> Compare</label>
+            <span class="badge badge--prio-medium">medium priority</span>
             <span class="badge badge--label badge--hold">Long-term hold candidate</span></div>
         </div>
         <div class="w__scores"><div class="score score--inv" title="Investment Score: long-term attractiveness, whatever today's price"><div class="score__ring" style="--p:77"><b>77</b></div><div class="score__label">Investment</div><div class="score__cov">93% data</div></div><div class="score score--buy" title="Buy Score: how good today's price is as an entry point"><div class="score__ring" style="--p:45"><b>45</b></div><div class="score__label">Buy</div><div class="score__cov">99% data</div></div></div>
@@ -408,7 +452,7 @@ async function refreshDashboards() {
   <div class="w__details" hidden>
     <div class="d__grid">
       <section><h4>Price history (1 year)</h4><svg class="pchart" viewBox="0 0 560 120" preserveAspectRatio="none"><polyline points="0.0,105.8 1.5,106.0 7.7,105.5 13.9,105.2 21.6,66.3 23.1,105.3 24.6,105.3 29.3,103.0 30.8,105.2 55.4,106.0 61.6,105.8 64.7,106.0 66.2,105.9 72.4,105.2 73.9,104.8 75.5,104.8 83.2,104.4 89.3,106.0 98.6,104.8 101.7,104.8 103.2,104.4 104.7,103.1 115.5,103.2 117.1,102.8 118.6,102.1 124.8,100.0 126.3,100.0 137.1,99.0 138.6,95.4 141.7,94.6 144.8,94.8 147.9,92.4 149.4,89.7 150.9,88.4 157.1,90.0 161.7,91.2 183.3,95.2 184.8,93.2 186.4,94.0 191.0,93.6 194.1,94.8 195.6,94.1 197.2,92.8 198.7,91.8 203.3,83.5 204.9,71.3 206.4,66.1 211.0,71.3 212.6,73.1 214.1,68.1 215.6,62.9 217.2,62.0 220.3,54.7 221.8,44.4 223.3,33.0 226.4,32.0 228.0,25.8 237.2,50.9 240.3,65.1 241.8,56.3 249.5,57.6 252.6,14.0 254.1,45.1 257.2,47.1 258.8,49.1 263.4,53.1 264.9,50.3 268.0,47.9 271.1,48.7 272.6,45.9 274.2,49.1 277.2,49.1 280.3,47.1 286.5,45.3 295.7,49.1 300.3,53.6 301.9,55.9 306.5,57.9 309.6,61.1 311.1,57.5 312.7,57.9 314.2,57.6 323.5,61.1 326.5,65.1 329.6,67.9 332.7,68.3 337.3,65.5 340.4,67.7 346.6,67.2 349.6,69.1 351.2,69.1 352.7,69.1 354.3,68.7 355.8,61.1 357.3,65.1 358.9,61.1 360.4,47.9 365.0,58.3 368.1,66.3 369.7,66.6 374.3,72.3 375.8,71.5 377.4,70.3 380.4,65.2 388.1,73.5 389.7,72.4 397.4,73.5 405.1,74.7 406.6,74.8 409.7,77.1 414.3,77.5 418.9,79.9 420.5,81.1 423.6,83.2 425.1,83.4 426.6,80.7 428.2,79.5 429.7,78.5 431.3,76.5 432.8,74.1 434.3,73.5 435.9,75.1 439.0,75.8 440.5,74.5 445.1,74.9 448.2,77.7 449.8,76.3 451.3,78.6 452.8,78.9 454.4,79.0 457.5,79.9 459.0,80.4 460.5,81.1 465.2,86.2 472.9,84.0 474.4,83.6 475.9,84.1 477.5,81.1 482.1,81.1 483.6,79.2 486.7,77.1 489.8,77.4 491.3,75.1 494.4,77.1 496.0,77.2 499.0,77.2 500.6,75.4 503.7,74.0 505.2,73.8 506.7,70.6 512.9,71.0 514.4,72.3 516.0,73.8 519.1,72.5 520.6,72.5 522.1,75.1 523.7,72.3 525.2,73.3 526.8,59.1 537.5,68.5 539.1,65.9 542.2,65.9 546.8,65.9 548.3,65.9 559.1,69.1 559.8,65.9 559.8,65.9 559.8,65.9 559.9,65.9 559.9,65.9 559.9,65.9 559.9,65.9 560.0,69.1" fill="none" stroke="url(#foilGrad)" stroke-width="2" vector-effect="non-scaling-stroke"/></svg><div class="pchart__axis"><span>Nov 25</span><span>low ¥47,999 · high ¥277,500</span><span>Nov 23</span></div>
-        <h4>Market data</h4><table class="mt"><tbody><tr><td>Current price</td><td>¥140,000 <span class='muted'>(Last sold 10 minutes ago)</span></td></tr><tr><td>Previous price (24h ago)</td><td>n/a</td></tr><tr><td>Average sale price</td><td>¥137,050 <span class='muted'>(last 30 days)</span></td></tr><tr><td>Recent high / low</td><td>¥165,000 / ¥125,000</td></tr><tr><td>90-day average / high / low</td><td>¥129,336 / ¥165,000 / ¥97,499</td></tr><tr><td>1-year high / low</td><td>¥277,500 / ¥47,999 <span class='muted'>(now 40% up the range)</span></td></tr><tr><td>All-time high / low</td><td>¥277,500 <span class='muted'>(2026-05-07)</span> / ¥8,000 <span class='muted'>(2023-09-30)</span><br><span class='muted'>-50% vs the all-time high · history since 2023-08-15 · shown for context, not scored</span></td></tr><tr><td>Long-term trend</td><td>+193.1% over 1 year</td></tr><tr><td>Price volatility (30 days)</td><td>7.2% typical swing</td></tr><tr><td>Sales</td><td>1 in 7 days · 20 in 30 days</td></tr><tr><td>Sales this week vs normal</td><td>0.2×</td></tr><tr><td>PSA 10 / PSA 9 / all grades</td><td>5,011 / 3,265 / 19,241</td></tr><tr><td>PSA 10 growth</td><td>n/a (needs 2+ weeks of PSA updates)</td></tr><tr><td>Release date</td><td>5/3/2018</td></tr><tr><td>Added to watchlist</td><td>2026-11-23</td></tr><tr><td>Last price check</td><td>Nov 23, 1:52 PM</td></tr></tbody></table></section>
+        <h4>Market data</h4><table class="mt"><tbody><tr><td>Current price</td><td>¥140,000 <span class='muted'>(Last sold 10 minutes ago)</span></td></tr><tr><td>Previous price (24h ago)</td><td>n/a</td></tr><tr><td>Average sale price</td><td>¥137,050 <span class='muted'>(last 30 days)</span></td></tr><tr><td>Recent high / low</td><td>¥165,000 / ¥125,000</td></tr><tr><td>90-day average / high / low</td><td>¥129,336 / ¥165,000 / ¥97,499</td></tr><tr><td>1-year high / low</td><td>¥277,500 / ¥47,999 <span class='muted'>(now 40% up the range)</span></td></tr><tr><td>All-time high / low</td><td>¥277,500 <span class='muted'>(2026-05-07)</span> / ¥8,000 <span class='muted'>(2023-09-30)</span><br><span class='muted'>-50% vs the all-time high · history since 2023-08-15 · shown for context, not scored</span></td></tr><tr><td>Long-term trend</td><td>+193.1% over 1 year</td></tr><tr><td>Price volatility (30 days)</td><td>7.2% typical swing</td></tr><tr><td>Sales</td><td>1 in 7 days · 20 in 30 days</td></tr><tr><td>Sales this week vs normal</td><td>0.2×</td></tr><tr><td>PSA 10 / PSA 9 / all grades</td><td>5,011 / 3,265 / 19,241</td></tr><tr><td>PSA 10 growth</td><td>n/a (needs 2+ weeks of PSA updates)</td></tr><tr><td>Release date</td><td>n/a</td></tr><tr><td>Added to watchlist</td><td>2026-11-23</td></tr><tr><td>Last price check</td><td>Nov 23, 1:52 PM</td></tr></tbody></table></section>
       <section><h4>Investment Score: 77/100</h4><p class="muted">93 of the 100 points could be judged from data or your input; the rest count as 0 until there is data.</p><table class="bd"><tbody><tr class=""><td>Character popularity <span class="src">(your list)</span></td><td class="num">15 / 15</td><td>Mew is tier S on your popularity list</td></tr><tr class=""><td>Card rarity <span class="src">(your input)</span></td><td class="num">14 / 15</td><td>Promo 9 pts, limited release +3, low reprint risk +2</td></tr><tr class=""><td>PSA population</td><td class="num">2 / 15</td><td>PSA 10 pop 5,011; growth not known yet (needs 2+ weeks of PSA updates)</td></tr><tr class=""><td>Sales volume &amp; liquidity</td><td class="num">13 / 20</td><td>4.7 sales/week over the last 30 days seen</td></tr><tr class=""><td>Price fundamentals</td><td class="num">13 / 15</td><td>1 year trend +193%; price swings 7%</td></tr><tr class=""><td>Overseas demand <span class="src">(your rating)</span></td><td class="num">10 / 10</td><td>your rating 10/10</td></tr><tr class=""><td>Artwork <span class="src">(your rating)</span></td><td class="num">10 / 10</td><td>your artwork-quality rating 10/10</td></tr></tbody></table><h4>Buy Score: 45/100 — Expensive relative to current conditions</h4><p class="muted">99 of the 100 points could be judged from data or your input; the rest count as 0 until there is data.</p><table class="bd"><tbody><tr class=""><td>Price vs target</td><td class="num">7 / 25</td><td>+17% vs auto target from 90-day prices ¥119,890</td></tr><tr class=""><td>Price vs history</td><td class="num">5 / 20</td><td>+8% vs the 90-day average ¥129,336</td></tr><tr class=""><td>Recent trend</td><td class="num">4 / 15</td><td>-5% in 7 days — falling with weaker sales, sales at 0.2× normal</td></tr><tr class=""><td>Sales volume &amp; liquidity</td><td class="num">9.8 / 15</td><td>4.7 sales/week over the last 30 days seen</td></tr><tr class=""><td>Investment Score</td><td class="num">11.6 / 15</td><td>Investment Score 77 (coverage 93%)</td></tr><tr class=""><td>Margin of safety &amp; risk</td><td class="num">8 / 10</td><td>40% up its 1-year range</td></tr></tbody></table></section>
     </div>
     <div class="d__grid">
@@ -422,16 +466,124 @@ async function refreshDashboards() {
   
   
 
-  <div class="legend">
-    <b>Labels.</b> Exceptional (Buy 90+, Investment 70+), Strong (Buy 80+, Investment 60+) and Potential (Buy 80+) buying
-    opportunities also need at least 1 sale a week and PSA 10 growth under 6% a month — a price drop alone never makes a card a buy.
-    "Price drop with weak demand" = down 10%+ while sales slowed to under half of normal. "Overheated" = up 15%+ in a week, or well above
-    its 90-day average at the top of its range. "Low-liquidity" = under 1 sale a week. "Long-term hold" = Investment 70+ but the price isn't
-    attractive yet.<br>
-    <b>Buy Score bands.</b> 90–100 exceptional · 80–89 strong · 70–79 attractive entry · 50–69 fair, consider waiting · 30–49 expensive ·
-    0–29 poor entry or elevated risk.
-  </div>
 </main>
+
+<div class="cmpbar" id="cmpBar">
+  <span id="cmpBarText"></span>
+  <button type="button" class="cmpbar__go" onclick="openCompare()">Compare</button>
+  <button type="button" class="cmpbar__clear" onclick="clearCompare()">Clear</button>
+</div>
+
+<div class="modal" id="compareModal" onclick="if (event.target === this) closeModal('compareModal')">
+  <div class="modal__box modal__box--wide">
+    <button type="button" class="modal__x" onclick="closeModal('compareModal')">×</button>
+    <h2>Side-by-side comparison</h2>
+    <div id="compareBody"></div>
+  </div>
+</div>
+
+<div class="modal" id="infoModal" onclick="if (event.target === this) closeModal('infoModal')">
+  <div class="modal__box">
+    <button type="button" class="modal__x" onclick="closeModal('infoModal')">×</button>
+    <h2>How the watchlist works</h2>
+    <div class="info">
+<h3>The watchlist in one minute</h3>
+<p>Cards you don't own yet but might buy. Every scheduled run (or <b>⬇ Scrape now</b>) checks their SNKRDUNK prices with the
+same scraper as your collection, saves everything, and works out two scores per card. You add and edit cards, your own ratings
+and all settings in the <a href="http://127.0.0.1:8971/watch" target="_blank" rel="noopener">watchlist editor</a> (needs <code>config_editor.py</code> running).</p>
+
+<h3>Two scores — and why they differ</h3>
+<p><b class="k-inv">Investment Score (0–100)</b> = how good the card is <i>long term</i>, whatever today's price.
+<b class="k-buy">Buy Score (0–100)</b> = how good <i>today's price</i> is as an entry point. A great card at a silly price scores high
+on the first and low on the second. Under each ring, <b>"% data"</b> is how much of that score could actually be judged: anything
+without data (or without your rating) scores <b>0</b> and is shown as "Not evaluated" — never guessed. So a new card scores low and
+climbs as history builds up. Open a card's <b>Details</b> to see every point.</p>
+
+<h3>Investment Score — 100 points</h3>
+<table class="info-t"><tbody>
+<tr><td>Character popularity</td><td>15</td><td>Your tier list: <b>S</b> (15 pts): 9 names · <b>A</b> (11 pts): 24 names · <b>B</b> (7 pts): 17 names. A named character not on the list gets 3. Edit it in the editor.</td></tr>
+<tr><td>Card rarity</td><td>15</td><td>Your rarity table (SAR 9, SIR 9, CSR 8, Promo 9, CHR 6, UR 8, HR 8, SR 6, AR 5, IR 5, RR 3, Other 3, MUR 9, FUR 9, RRR 5) + limited release +3, reprint risk
+  low +2 / medium +0 / high -3; capped 0–15.</td></tr>
+<tr><td>PSA population</td><td>15</td><td>Up to 8 for a low PSA 10 count (under 500 = 8 … 15,000+ = 1) + up to 7 for slow growth
+  (under 1% a month = 7 … 10%+ = 0). Low-pop points are capped at 4 if the card sells under once a week and isn't tier S/A.</td></tr>
+<tr><td>Sales &amp; liquidity</td><td>20</td><td>Sales per week: 14+ = 20, 7+ = 17, 3+ = 13, 1+ = 8, ¼+ = 4, less = 1.</td></tr>
+<tr><td>Price fundamentals</td><td>15</td><td>Long-term trend (1 year, else 6 months, else 2–4 months) up to 8 + price stability (30-day swings) up to 7.</td></tr>
+<tr><td>Overseas demand</td><td>10</td><td>Your 0–10 rating.</td></tr>
+<tr><td>Artwork</td><td>10</td><td>Your 0–10 artwork-quality rating.</td></tr>
+</tbody></table>
+
+<h3>Buy Score — 100 points</h3>
+<table class="info-t"><tbody>
+<tr><td>Price vs target</td><td>25</td><td>10%+ below target = 25, at target = 22 … 35%+ above = 0. Uses your target, or an <b>auto</b> target
+  (the price only 25% of the last 90 days' prices were at or below; needs 5+ prices over 3+ weeks).</td></tr>
+<tr><td>Price vs history</td><td>20</td><td>Price vs the 90-day average: 15%+ below = 20 … 20%+ above = 0.</td></tr>
+<tr><td>Recent trend</td><td>15</td><td>7-day move judged with sales: a dip while sales hold up = 15, steady = 9, rising = 5, a speculative spike = 0,
+  falling with weaker sales = 4 (sharp drop with weak sales = 1).</td></tr>
+<tr><td>Sales &amp; liquidity</td><td>15</td><td>The liquidity points above, scaled to 15.</td></tr>
+<tr><td>Investment Score</td><td>15</td><td>Investment Score ÷ 100 × 15.</td></tr>
+<tr><td>Margin of safety</td><td>10</td><td>Starts at 8; −3 near its 1-year (or 90-day) high, −3 if PSA 10 pop grows 6%+ a month, −2 for big price
+  swings, −4 if demand looks weaker, −3 for a very thin market; +2 in the lower third of its 1-year range (needs a year of history).</td></tr>
+</tbody></table>
+<p><b>Cheap for a bad reason:</b> if the price fell 10%+ while sales dropped below half of normal, the "price vs target" and
+"price vs history" points are halved — a price drop alone never makes a card a buy.</p>
+<p><b>Buy Score bands:</b> 90–100 exceptional · 80–89 strong · 70–79 attractive entry · 50–69 fair, consider waiting ·
+30–49 expensive · 0–29 poor entry or elevated risk.</p>
+
+<h3>Labels (the coloured badge)</h3>
+<p>The label weighs more than the Buy Score alone, checked in this order:</p>
+<ul>
+<li><b class="lb-hot">Overheated market</b> — up 15%+ in a week, or 15%+ above its 90-day average at the top of its range, or a burst of sales while rising.</li>
+<li><b class="lb-weak">Price drop with weak demand</b> — down 10%+ while sales fell below half of normal.</li>
+<li><b class="lb-thin">Low-liquidity speculative card</b> — under 1 sale a week: may be hard to sell.</li>
+<li><b class="lb-buy3">Exceptional</b> (Buy 90+, Investment 70+), <b class="lb-buy2">Strong</b> (Buy 80+, Investment 60+) and
+  <b class="lb-buy1">Potential</b> (Buy 80+) <b>buying opportunity</b> — all also need 1+ sale a week and PSA 10 growth under 6% a month.</li>
+<li><b class="lb-hold">Long-term hold candidate</b> — Investment 70+ but the price isn't attractive yet.</li>
+<li><b>Watching</b> — none of the above.</li>
+</ul>
+<p>The reasons under each card say why it got its label.</p>
+
+<h3>Price data</h3>
+<p>Changes over 24h, 7d, 30d, 90d, 6m and 1y use real saved prices from that time (the tracker's own checks and SNKRDUNK's
+price chart); with no price from then they show <b>n/a</b>. Sales counts come from every individual sale the tracker has seen
+("≥" means older sales weren't visible yet). The all-time high/low in Details is for context only and never scored (release
+hype and old markets would mislead).</p>
+
+<h3>Checklist</h3>
+<p>Details shows a checklist per card: ✓ yes, ✗ no, • information, — not evaluated. It covers popularity, rarity, PSA
+(low PSA 10 pop = under 15,000), liquidity, valuation, overseas demand and artwork.
+"Checklist %" is how many items could be evaluated.</p>
+
+<h3>PSA numbers</h3>
+<p>Added with your Tampermonkey script: open the card's GemRate (or PSA) page, or press <b>⏰ Update stale cards</b> to go through every
+card not updated in 7 days, one tab at a time. GemRate gives the PSA 10 count, PSA 9 count, all-grades total and gem rate.</p>
+
+<h3>Alerts</h3>
+<p>Sent to your ntfy topic when a checked card's price moves: drop of 8%+ in 24h or 15%+ in 7 days,
+rise of 10%+ in 24h or 20%+ in 7 days, spike of 25%+ in 24h, 30-day trend
+±20%, a 8%+ dip while sales stay strong, your target reached, unusual sales volume, or
+Buy Score 80+. Everything a card triggers in one check is combined into one message; the same alert never repeats within
+24h and is re-sent at most every 72h while it stays true. The last 3 days of alerts also show in the
+🔔 banner on your PSA10 and raw dashboards. Change any of this in the editor's settings.</p>
+
+<h3>Using this page</h3>
+<ul>
+<li><b>Filters and sort</b> at the top (remembered in this browser).</li>
+<li><b>Compare</b>: tick "Compare" on 2–3 cards, then press <b>Compare</b> in the bar at the bottom for a side-by-side view with the
+  key differences spelled out and the better value in each row highlighted.</li>
+<li><b>Details</b> on a card: price chart, market data, both score breakdowns, checklist, score history, alerts and your notes.</li>
+<li><b>⬇ Scrape now</b> checks all watchlist cards on SNKRDUNK now; <b>🔄 Refresh</b> redraws the pages from saved data
+  (both need <code>config_editor.py</code> and only show on your computer).</li>
+</ul>
+
+<h3>Your data</h3>
+<p>Kept in <code>config_watch.json</code> and <code>data/watch_*.json</code> — prices, every sale seen, PSA history, score history,
+alerts, and every change to targets, ratings and checklists. Nothing is overwritten, and everything is in the daily backup
+(<code>py restore_backup.py</code>). Buying a card ("I bought this…" in the editor) can move it into your collection and keeps its
+watchlist history. The page is published to GitHub Pages with your other dashboards.</p>
+
+<p class="muted">Scores and labels are indicators to support your decisions, not investment advice.</p></div>
+  </div>
+</div>
 
 <script>
 const CONFIG_EDITOR_URL = 'http://127.0.0.1:8971';
@@ -439,6 +591,157 @@ const CONFIG_EDITOR_URL = 'http://127.0.0.1:8971';
   var local = location.protocol === 'file:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
   if (!local) document.querySelectorAll('.local-only').forEach(function (el) { el.style.display = 'none'; });
 })();
+
+// ---------- pop-ups ----------
+function openModal(id) { document.getElementById(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); document.body.style.overflow = ''; }
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape') document.querySelectorAll('.modal.open').forEach(function (m) { closeModal(m.id); }); });
+
+// ---------- side-by-side comparison ----------
+const WATCH_DATA = {"w-Mew_ex_SAR": {"name": "Mew ex SAR", "anchor": "w-Mew_ex_SAR", "img": "data/images/Mew_ex_SAR.webp", "url": "https://snkrdunk.com/apparels/128121/sales-histories", "sub": "151 · #205/165 · PSA 10", "label": "Long-term hold candidate", "label_class": "hold", "priority": "medium", "inv": 74, "inv_cov": 93, "buy": 63, "buy_cov": 99, "band": "Fair price, consider waiting", "confidence": 96, "checklist": 89, "price": 62500, "target": 55000, "target_auto": false, "vs_target": 13.6, "c24": null, "c7": 0.1, "c30": -10.6, "c90": -29.9, "c180": -40.0, "c365": 57.0, "avg90": 65948, "vs_avg": -5.2, "pos1y": 21.0, "below_ath": -58.3, "trend": 56.8, "trend_basis": "1 year", "volatility": 1.9, "spw": 11.7, "sales30": 22, "vol_ratio": null, "psa10": 23702, "psa9": 4295, "psa_total": 29243, "gem_rate": 81.1, "psa_growth": null, "tier": "S", "rarity": "SAR", "rarity_pts": 9.0, "reprint": "low", "artwork": 10.0, "overseas": 5.0, "inv_parts": [["Character popularity", 15, 15], ["Card rarity", 11.0, 15], ["PSA population", 1, 15], ["Sales volume & liquidity", 17, 20], ["Price fundamentals", 15, 15], ["Overseas demand", 5.0, 10], ["Artwork", 10.0, 10]], "buy_parts": [["Price vs target", 7, 25], ["Price vs history", 13, 20], ["Recent trend", 9, 15], ["Sales volume & liquidity", 12.8, 15], ["Investment Score", 11.1, 15], ["Margin of safety & risk", 10, 10]], "reasons": ["Investment Score 74", "Buy Score 63 — wait for a better price"]}, "w-Armored_Mewtwo": {"name": "Armored Mewtwo", "anchor": "w-Armored_Mewtwo", "img": "data/images/Armored_Mewtwo.webp", "url": "https://snkrdunk.com/apparels/107574/sales-histories", "sub": "Promo · #SM-P 365 · PSA 10", "label": "Long-term hold candidate", "label_class": "hold", "priority": "medium", "inv": 77, "inv_cov": 93, "buy": 45, "buy_cov": 99, "band": "Expensive relative to current conditions", "confidence": 96, "checklist": 94, "price": 140000, "target": 119890, "target_auto": true, "vs_target": 16.8, "c24": null, "c7": -5.4, "c30": 3.5, "c90": 27.3, "c180": -28.2, "c365": 185.7, "avg90": 129336, "vs_avg": 8.2, "pos1y": 40.0, "below_ath": -49.5, "trend": 193.1, "trend_basis": "1 year", "volatility": 7.2, "spw": 4.7, "sales30": 20, "vol_ratio": 0.16, "psa10": 5011, "psa9": 3265, "psa_total": 19241, "gem_rate": 26.0, "psa_growth": null, "tier": "S", "rarity": "Promo", "rarity_pts": 9.0, "reprint": "low", "artwork": 10.0, "overseas": 10.0, "inv_parts": [["Character popularity", 15, 15], ["Card rarity", 14.0, 15], ["PSA population", 2, 15], ["Sales volume & liquidity", 13, 20], ["Price fundamentals", 13, 15], ["Overseas demand", 10, 10], ["Artwork", 10.0, 10]], "buy_parts": [["Price vs target", 7, 25], ["Price vs history", 5, 20], ["Recent trend", 4, 15], ["Sales volume & liquidity", 9.8, 15], ["Investment Score", 11.6, 15], ["Margin of safety & risk", 8, 10]], "reasons": ["Investment Score 77", "Buy Score 45 — wait for a better price"]}};
+let compareIds = [];
+function toggleCompare(box) {
+  if (box.checked) {
+    if (compareIds.length >= 3) { box.checked = false; alert('You can compare up to 3 cards at a time.'); return; }
+    compareIds.push(box.value);
+  } else {
+    compareIds = compareIds.filter(function (id) { return id !== box.value; });
+  }
+  updateCompareBar();
+}
+function clearCompare() { compareIds = []; document.querySelectorAll('.cmp-box').forEach(function (b) { b.checked = false; }); updateCompareBar(); }
+function updateCompareBar() {
+  const bar = document.getElementById('cmpBar');
+  bar.classList.toggle('show', compareIds.length > 0);
+  document.getElementById('cmpBarText').textContent = compareIds.length === 1 ? '1 card picked — pick 1 or 2 more' : compareIds.length + ' cards picked';
+  bar.querySelector('.cmpbar__go').disabled = compareIds.length < 2;
+}
+
+function commas(v) { const n = Number(v); const r = Math.round(n) === n ? String(n) : n.toFixed(1); return r.replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+function yen(v) { return v == null ? null : '¥' + commas(Math.round(v)); }
+function pct(v) { return v == null ? null : (v > 0 ? '+' : '') + v + '%'; }
+function fmtNum(v) { return v == null ? null : commas(v); }
+const TIER_RANK = { S: 3, A: 2, B: 1 };
+
+// [group or row label, key/getter, format, direction: 'high' | 'low' | 'sign' | null, word for the differences summary]
+const CMP_ROWS = [
+  ['Scores'],
+  ['Investment Score', 'inv', function (v, d) { return v + ' (' + d.inv_cov + '% data)'; }, 'high', 'Investment Score'],
+  ['Buy Score', 'buy', function (v, d) { return v + ' — ' + d.band.split(',')[0]; }, 'high', 'Buy Score'],
+  ['Label', 'label', String, null],
+  ['Data confidence', 'confidence', function (v) { return v + '%'; }, 'high', 'data confidence'],
+  ['Checklist evaluated', 'checklist', function (v) { return v + '%'; }, 'high'],
+  ['Price'],
+  ['Current price', 'price', yen, null],
+  ['Target', 'target', function (v, d) { return yen(v) + (d.target_auto ? ' (auto)' : ''); }, null],
+  ['Price vs target', 'vs_target', pct, 'low', 'price relative to its target'],
+  ['Price vs 90-day average', 'vs_avg', pct, 'low', 'price relative to its 90-day average'],
+  ['Position in 1-year range', 'pos1y', function (v) { return v + '% up'; }, 'low', 'position in its 1-year range'],
+  ['24 hours', 'c24', pct, 'sign'], ['7 days', 'c7', pct, 'sign', '7-day change'], ['30 days', 'c30', pct, 'sign', '30-day change'],
+  ['90 days', 'c90', pct, 'sign'], ['6 months', 'c180', pct, 'sign'], ['1 year', 'c365', pct, 'sign', '1-year change'],
+  ['Long-term trend', 'trend', function (v, d) { return pct(v) + ' (' + d.trend_basis + ')'; }, 'high', 'long-term trend'],
+  ['Price swings (30 days)', 'volatility', function (v) { return v + '%'; }, 'low', 'price stability'],
+  ['vs all-time high', 'below_ath', pct, null],
+  ['Market'],
+  ['Sales per week', 'spw', function (v) { return v + '/week'; }, 'high', 'sales per week'],
+  ['Sales in 30 days', 'sales30', fmtNum, 'high'],
+  ['Sales this week vs normal', 'vol_ratio', function (v) { return v + '×'; }, 'high', 'recent sales vs normal'],
+  ['PSA'],
+  ['PSA 10 population', 'psa10', fmtNum, 'low', 'PSA 10 population'],
+  ['PSA 9 population', 'psa9', fmtNum, null],
+  ['All PSA grades', 'psa_total', fmtNum, null],
+  ['Gem rate', 'gem_rate', function (v) { return v + '%'; }, null],
+  ['PSA 10 growth / 30 days', 'psa_growth', pct, 'low', 'PSA 10 growth'],
+  ['Card & your ratings'],
+  ['Popularity tier', function (d) { return d.tier ? TIER_RANK[d.tier] : null; }, function (v, d) { return 'Tier ' + d.tier; }, 'high', 'popularity tier'],
+  ['Rarity', 'rarity_pts', function (v, d) { return d.rarity + ' (' + v + ' pts)'; }, 'high', 'rarity points'],
+  ['Reprint risk', 'reprint', String, null],
+  ['Artwork quality', 'artwork', function (v) { return v + '/10'; }, 'high', 'artwork rating'],
+  ['Overseas demand', 'overseas', function (v) { return v + '/10'; }, 'high', 'overseas-demand rating'],
+  ['Priority', 'priority', String, null],
+];
+
+function cmpValue(row, d) { return typeof row[1] === 'function' ? row[1](d) : d[row[1]]; }
+
+function openCompare() {
+  const cards = compareIds.map(function (id) { return WATCH_DATA[id]; }).filter(Boolean);
+  if (cards.length < 2) return;
+  let head = '<tr><th></th>' + cards.map(function (d) {
+    return '<th>' + (d.img ? '<img src="' + d.img + '" alt="">' : '') + '<a href="#' + d.anchor + '" onclick="closeModal(\'compareModal\')">' +
+      escHtml(d.name) + '</a><span class="muted">' + escHtml(d.sub) + '</span></th>';
+  }).join('') + '</tr>';
+  let body = '';
+  const diffs = [];
+  CMP_ROWS.forEach(function (row) {
+    if (row.length === 1) { body += '<tr class="grp"><td colspan="' + (cards.length + 1) + '">' + row[0] + '</td></tr>'; return; }
+    const vals = cards.map(function (d) { const v = cmpValue(row, d); return v === '' ? null : v; });
+    const nums = vals.filter(function (v) { return typeof v === 'number'; });
+    let best = null, worst = null;
+    if ((row[3] === 'high' || row[3] === 'low') && nums.length >= 2 && Math.max.apply(null, nums) !== Math.min.apply(null, nums)) {
+      best = row[3] === 'high' ? Math.max.apply(null, nums) : Math.min.apply(null, nums);
+      worst = row[3] === 'high' ? Math.min.apply(null, nums) : Math.max.apply(null, nums);
+    }
+    body += '<tr><td>' + row[0] + '</td>' + cards.map(function (d, i) {
+      const v = vals[i];
+      if (v == null) return '<td class="na">n/a</td>';
+      let cls = '';
+      if (best !== null && v === best) cls = 'best';
+      else if (best !== null && cards.length > 2 && v === worst) cls = 'worst';
+      else if (row[3] === 'sign') cls = v > 0 ? 'pos' : v < 0 ? 'neg' : '';
+      return '<td class="' + cls + '">' + escHtml(row[2](v, d)) + '</td>';
+    }).join('') + '</tr>';
+    if (row[4] && best !== null) diffs.push(describeDiff(row, cards, vals, best));
+    if (row[4] && row[3] === 'sign' && nums.length >= 2 && Math.max.apply(null, nums) - Math.min.apply(null, nums) >= 10) diffs.push(describeDiff(row, cards, vals, null));
+  });
+  // score breakdowns
+  ['inv_parts', 'buy_parts'].forEach(function (key) {
+    body += '<tr class="grp"><td colspan="' + (cards.length + 1) + '">' + (key === 'inv_parts' ? 'Investment Score breakdown' : 'Buy Score breakdown') + '</td></tr>';
+    cards[0][key].forEach(function (part, k) {
+      const pts = cards.map(function (d) { return d[key][k] ? d[key][k][1] : null; });
+      const ns = pts.filter(function (v) { return v != null; });
+      const hi = ns.length >= 2 && Math.max.apply(null, ns) !== Math.min.apply(null, ns) ? Math.max.apply(null, ns) : null;
+      const lo = hi !== null && cards.length > 2 ? Math.min.apply(null, ns) : null;
+      body += '<tr><td>' + escHtml(part[0]) + ' <span class="muted">/' + part[2] + '</span></td>' + pts.map(function (v) {
+        return v == null ? '<td class="na">not evaluated</td>' : '<td class="' + (v === hi ? 'best' : v === lo ? 'worst' : '') + '">' + v + '</td>';
+      }).join('') + '</tr>';
+    });
+  });
+  const shown = diffs.filter(Boolean).slice(0, 10);
+  const missing = CMP_ROWS.filter(function (r) { return r.length > 1 && r[4]; }).filter(function (r) {
+    const v = cards.map(function (d) { return cmpValue(r, d); }); return v.some(function (x) { return x == null; }) && v.some(function (x) { return x != null; });
+  }).map(function (r) { return r[0]; });
+  let html = '<div class="cmp-diffs"><h4>Key differences</h4>' + (shown.length
+    ? '<ul>' + shown.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul>'
+    : '<p class="muted">No big differences in the figures these cards both have yet.</p>') +
+    (missing.length ? '<p class="cmp-note">Can\'t compare yet (data missing on at least one card): ' + missing.join(', ') + '.</p>' : '') + '</div>';
+  html += '<div class="cmp-wrap"><table class="cmp-t"><thead>' + head + '</thead><tbody>' + body + '</tbody></table></div>';
+  html += '<p class="cmp-note">Green = the better value in that row' + (cards.length > 2 ? ', red = the weakest' : '') +
+    ' (for buying: lower price vs target/average, more sales, lower PSA 10 pop and growth, higher scores and ratings). Price changes are coloured up/down only.</p>';
+  document.getElementById('compareBody').innerHTML = html;
+  openModal('compareModal');
+}
+
+// One plain-English line for a row where the cards differ meaningfully.
+function describeDiff(row, cards, vals, best) {
+  const named = cards.map(function (d, i) { return { name: d.name, v: vals[i], d: d }; }).filter(function (x) { return typeof x.v === 'number'; });
+  const all = named.map(function (x) { return '<b>' + escHtml(x.name) + '</b> ' + escHtml(row[2](x.v, x.d)); }).join(' · ');
+  if (row[3] === 'sign') return 'Different momentum — ' + row[4] + ': ' + all + '.';
+  const hi = Math.max.apply(null, named.map(function (x) { return x.v; })), lo = Math.min.apply(null, named.map(function (x) { return x.v; }));
+  const gap = hi - lo;
+  const ratio = lo > 0 ? hi / lo : Infinity;
+  const pctRow = /vs_|pos1y|trend|volatility|psa_growth/.test(String(row[1]));
+  const meaningful = ['inv', 'buy', 'confidence'].indexOf(row[1]) !== -1 ? gap >= 10
+    : pctRow ? gap >= 8
+    : ['psa10', 'spw', 'vol_ratio'].indexOf(row[1]) !== -1 ? ratio >= 1.5
+    : gap >= 1;
+  if (!meaningful) return null;
+  const winner = named.filter(function (x) { return x.v === best; })[0];
+  const better = { 'price relative to its target': 'the cheapest price relative to its target', 'price relative to its 90-day average': 'the cheapest price compared with its 90-day average',
+                   'position in its 1-year range': 'the price lowest in its 1-year range', 'price stability': 'the steadiest price', 'PSA 10 population': 'the lowest PSA 10 population',
+                   'PSA 10 growth': 'the slowest-growing PSA 10 population' }[row[4]] || ((named.length > 2 ? 'the highest ' : 'the higher ') + row[4]);
+  return '<b>' + escHtml(winner.name) + '</b> has ' + better + ' — ' + all + '.';
+}
+function escHtml(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 
 function toggleDetails(btn) {
   const d = btn.closest('.w').querySelector('.w__details');
